@@ -3,8 +3,10 @@ package com.proj.comp2171project;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -12,22 +14,33 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class RecordController {
     @FXML
     ImageView imageView = new ImageView();
 
+    List<String> lstFile;
+
     @FXML
     private Button btnCancel;
+
+    @FXML
+    private Button uploadBtn;
+
+    @FXML
+    private TextField labeltxt;
 
     @FXML
     private Button btnSave;
@@ -60,20 +73,37 @@ public class RecordController {
     private TextField tfid;
 
     @FXML
+    private DatePicker medicalDate;
+
+    @FXML
+    private DatePicker polRecDate;
+
+    @FXML
+    private DatePicker psraDate;
+
+    @FXML
+    private TextField tfContact;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    @FXML
     void onHelloButtonClick(ActionEvent event) {
         System.out.println("You Clicked ME!!");
         if (event.getSource() == btnSave) {
             insertRecord();
         }
     }
+
     @FXML
     void handleDragOver(DragEvent event) {
         if (event.getDragboard().hasFiles()) {
             System.out.println("New File");
             event.acceptTransferModes(TransferMode.ANY);
         }
-
     }
+
     @FXML
     void handleDrop(DragEvent event) throws FileNotFoundException {
         List<File> files = event.getDragboard().getFiles();
@@ -83,6 +113,26 @@ public class RecordController {
         imageView.setImage(img);
     }
 
+    @FXML
+    void saveFileBtnClick(ActionEvent event){
+        if (event.getSource()== uploadBtn){
+            FileChooser fc = new FileChooser();
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
+            File f = fc.showOpenDialog(null);
+            if (f != null){
+                labeltxt.setText("Selected File:" + f.getAbsolutePath());
+            }
+        }
+    }
+
+    public void initialize(URL url,ResourceBundle rb){
+        lstFile = new ArrayList<>();
+        lstFile.add("*.doc");
+        lstFile.add("*.docx");
+        lstFile.add("*.DOC");
+        lstFile.add("*.DOCX");
+        //lstFile.add("*.pdf");
+    }
 
     //public void initialize(URL url, ResourceBundle rb) {
     //showRecords();
@@ -100,9 +150,11 @@ public class RecordController {
             return null;
         }
     }
+
     private void insertRecord(){
+
         //String query = "INSERT INTO records(id,fname,lname,company) VALUES (" + tfid.getText() + "," + tfFname.getText() + "," + tfLname.getText() + "," + tfCompany.getText() +")";
-        String query = "INSERT INTO records VALUES (" + tfid.getText() + ",'" + tfFname.getText() + "','" + tfLname.getText() + "','" + tfCompany.getText() +"')";
+        String query = "INSERT INTO records VALUES (" + tfid.getText() + ",'" + tfFname.getText() + "','" + tfLname.getText() + "','" + tfCompany.getText() +"','" + tfCompany.getText() +"')";
         executeQuery(query);
     }
 
@@ -115,6 +167,21 @@ public class RecordController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    public void switchToHome(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
+        scene = new Scene(root, 950, 600);
+        //stage.setScene();
+        //scene.getStylesheets().add("theme.css");
+        //stage.setTitle("GBD Dash");
+        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
     }
 }
 

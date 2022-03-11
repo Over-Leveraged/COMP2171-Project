@@ -1,0 +1,50 @@
+.root {
+	-fx-body-color : #F5F5F5;
+	-fx-outer-border : #cecece;
+}
+.button:focused, .toggle-button:focused,
+.split-menu-button:focused, .menu-button:focused,
+.number-button:focused,
+.combo-box:focused .text-field, .choice-box:focused, .color-picker:focused, .date-picker:focused .text-field
+{
+	-fx-effect: dropshadow(gaussian, #b4d1f3, 3, 3, 0, 0);
+}
+.button,.menu-button,.toggle-button,.split-menu-button {
+	-fx-font-size: 14;
+	-fx-background-radius: 4;
+	-fx-border-radius: 10;
+	-fx-pref-height: 30;
+	-fx-min-width: 30;
+    -fx-background-color: #008CBA;
+    -fx-border-radius: 10px;
+    -fx-height: 40px;
+    -fx-width: 150px;
+    -fx-border-style: none;
+    -fx-outline-style: none;
+    -fx-transition: all 0.5s;
+
+
+}
+.button span {
+  -fx-cursor: pointer;
+  -fx-display: inline-block;
+  -fx-position: relative;
+  -fx-transition: 0.5s;
+}
+.button span:after {
+  -fx-content: '\00bb';
+  -fx-position: absolute;
+  -fx-opacity: 0;
+  -fx-top: 0;
+  -fx-right: -20px;
+  -fx-transition: 0.5s;
+}
+.button {
+  -fx-transition-duration: 0.4s;
+}
+
+.button:hover {
+  -fx-background-color: #4CAF50; /* Green */
+  -fx-color: white;
+  cursor: pointer;
+}

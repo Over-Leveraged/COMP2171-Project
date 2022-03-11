@@ -1,0 +1,29 @@
+.root {
+	-fx-body-color : #F5F5F5;
+	-fx-outer-border : #cecece;
+}
+.button span {
+  -fx-cursor: pointer;
+  -fx-display: inline-block;
+  -fx-position: relative;
+  -fx-transition: 0.5s;
+}
+
+.button span:after {
+  -fx-content: '\00bb';
+  -fx-position: absolute;
+  -fx-opacity: 0;
+  -fx-top: 0;
+  -fx-right: -20px;
+  -fx-transition: 0.5s;
+}
+.button {
+  -fx-transition-duration: 0.4s;
+  -fx-background-color: #5082a1;
+}
+
+.button:hover {
+  -fx-background-color: #4CAF50; /* Green */
+  -fx-color: white;
+  cursor: pointer;
+}
