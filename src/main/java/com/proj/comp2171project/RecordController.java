@@ -37,7 +37,13 @@ public class RecordController {
     private Button btnCancel;
 
     @FXML
-    private Button uploadBtn;
+    private Button btnPolRec;
+
+    @FXML
+    private Button btnMed;
+
+    @FXML
+    private Button btnPSRA;
 
     @FXML
     private TextField labeltxt;
@@ -84,9 +90,28 @@ public class RecordController {
     @FXML
     private TextField tfContact;
 
+    @FXML
+    private TextField tfMedical;
+
+    @FXML
+    private TextField tfPSRA;
+
+    @FXML
+    private TextField tfPolR;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private int id;
+    private String fname;
+    private String lname;
+    private String company;
+    private String contact;
+    private String medicalPath;
+    private String psraPath;
+    private String policePath;
+
+   // private
 
     @FXML
     void onHelloButtonClick(ActionEvent event) {
@@ -108,22 +133,35 @@ public class RecordController {
     void handleDrop(DragEvent event) throws FileNotFoundException {
         List<File> files = event.getDragboard().getFiles();
         Image img = new Image(new FileInputStream(files.get(0)));
-        //ImageView imageView = new ImageView();
-
         imageView.setImage(img);
     }
 
     @FXML
     void saveFileBtnClick(ActionEvent event){
-        if (event.getSource()== uploadBtn){
+        if (event.getSource()== btnMed) {
             FileChooser fc = new FileChooser();
-            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
+            fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
             File f = fc.showOpenDialog(null);
-            if (f != null){
-                labeltxt.setText("Selected File:" + f.getAbsolutePath());
+            if (f != null) {
+                tfMedical.setText(f.getAbsolutePath());
             }
+        }else if (event.getSource()== btnPSRA){
+            FileChooser fcPsra = new FileChooser();
+            fcPsra.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
+            File f = fcPsra.showOpenDialog(null);
+            if (f != null){
+                tfPSRA.setText( f.getAbsolutePath());
+            }
+        } else if (event.getSource()== btnPolRec){
+            FileChooser fcPol = new FileChooser();
+            fcPol.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files","*.pdf"));
+            File f = fcPol.showOpenDialog(null);
+            if (f != null){
+                tfPolR.setText( f.getAbsolutePath());
+             }
         }
     }
+
 
     public void initialize(URL url,ResourceBundle rb){
         lstFile = new ArrayList<>();
@@ -142,7 +180,7 @@ public class RecordController {
     public Connection getConnection() {
         Connection conn;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/officerrecords", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/guardsdb", "root", "");
             return conn;
         } catch (Exception e) {
             e.printStackTrace();
@@ -152,9 +190,18 @@ public class RecordController {
     }
 
     private void insertRecord(){
-
-        //String query = "INSERT INTO records(id,fname,lname,company) VALUES (" + tfid.getText() + "," + tfFname.getText() + "," + tfLname.getText() + "," + tfCompany.getText() +")";
-        String query = "INSERT INTO records VALUES (" + tfid.getText() + ",'" + tfFname.getText() + "','" + tfLname.getText() + "','" + tfCompany.getText() +"','" + tfCompany.getText() +"')";
+        id = Integer.parseInt(tfid.getText());
+        fname = tfFname.getText();
+        lname = tfLname.getText();
+        company = tfCompany.getText();
+        contact = tfContact.getText();
+        medicalPath = tfMedical.getText();
+        policePath = tfPolR.getText();
+        psraPath = tfPSRA.getText();
+        //medExpiry = medicalDate;
+        //System.out.println(medicalDate.getValue());
+        String query = "INSERT INTO guardsdb VALUES (" + id + ",'" + fname + "','" + lname +"','" + company +"','" + contact +"','" + medicalDate.getValue()
+                        +"','" + medicalPath +"','" + psraDate.getValue() +"','" + polRecDate.getValue() +"')";
         executeQuery(query);
     }
 
@@ -168,17 +215,13 @@ public class RecordController {
             e.printStackTrace();
         }
     }
+    //ADD home button
     @FXML
     public void switchToHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
         scene = new Scene(root, 950, 600);
-        //stage.setScene();
-        //scene.getStylesheets().add("theme.css");
-        //stage.setTitle("GBD Dash");
-        //stage.initStyle(StageStyle.UNDECORATED);
+        scene.getStylesheets().add("theme.css");
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");

@@ -49,22 +49,22 @@
                 <TextField fx:id="tfFname" stylesheets="@../../../theme.css" />
                 <TextField fx:id="tfLname" stylesheets="@../../../theme.css" />
                 <TextField fx:id="tfCompany" stylesheets="@../../../theme.css" />
-            <TextField stylesheets="@../../../theme.css" />
+            <TextField fx:id="tfContact" stylesheets="@../../../theme.css" />
             </children>
         </VBox>
         <Button fx:id="btnSave" layoutX="79.0" layoutY="453.0" mnemonicParsing="false" onAction="#onHelloButtonClick" prefHeight="40.0" prefWidth="134.0" stylesheets="@../../../theme.css" text="Save Record" textFill="WHITE" />
         <Button fx:id="btnCancel" layoutX="284.0" layoutY="453.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="128.0" stylesheets="@../../../theme.css" text="Cancel" textFill="WHITE" />
-      <TextField fx:id="labeltxt" layoutX="581.0" layoutY="108.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
-      <DatePicker layoutX="581.0" layoutY="155.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
+      <TextField fx:id="tfMedical" layoutX="581.0" layoutY="108.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
+      <DatePicker fx:id="medicalDate" layoutX="581.0" layoutY="155.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
       <Label layoutX="455.0" layoutY="159.0" stylesheets="@../../../theme.css" text="Medical Expiry Date" />
-      <Button fx:id="uploadBtn" layoutX="455.0" layoutY="108.0" mnemonicParsing="false" onAction="#saveFileBtnClick" stylesheets="@../../../theme.css" text="Upload Medical" textFill="WHITE" />
-      <Button fx:id="uploadBtn1" layoutX="458.0" layoutY="204.0" mnemonicParsing="false" onAction="#saveFileBtnClick" stylesheets="@../../../theme.css" text="Upload PSRA" textFill="WHITE" />
-      <TextField fx:id="labeltxt1" layoutX="581.0" layoutY="204.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
+      <Button fx:id="btnMed" layoutX="455.0" layoutY="108.0" mnemonicParsing="false" onAction="#saveFileBtnClick" stylesheets="@../../../theme.css" text="Upload Medical" textFill="WHITE" />
+      <Button fx:id="btnPSRA" layoutX="458.0" layoutY="204.0" mnemonicParsing="false" onAction="#saveFileBtnClick" stylesheets="@../../../theme.css" text="Upload PSRA" textFill="WHITE" />
+      <TextField fx:id="tfPSRA" layoutX="581.0" layoutY="204.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
       <Label layoutX="455.0" layoutY="262.0" stylesheets="@../../../theme.css" text="PSRA Expiry Date" />
-      <DatePicker layoutX="581.0" layoutY="258.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
-      <Button fx:id="uploadBtn2" layoutX="77.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveFileBtnClick" stylesheets="@../../../theme.css" text="Upload Police Rec" textFill="WHITE" />
-      <TextField fx:id="labeltxt2" layoutX="213.0" layoutY="344.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
+      <DatePicker fx:id="psraDate" layoutX="581.0" layoutY="258.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
+      <Button fx:id="btnPolRec" layoutX="77.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveFileBtnClick" stylesheets="@../../../theme.css" text="Upload Police Rec" textFill="WHITE" />
+      <TextField fx:id="tfPolR" layoutX="213.0" layoutY="344.0" prefHeight="25.0" prefWidth="199.0" stylesheets="@../../../theme.css" />
       <Label layoutX="77.0" layoutY="389.0" prefHeight="17.0" prefWidth="112.0" text="Police Record Expiry" />
-      <DatePicker layoutX="213.0" layoutY="385.0" prefHeight="25.0" prefWidth="199.0" />
+      <DatePicker fx:id="polRecDate" layoutX="213.0" layoutY="385.0" prefHeight="25.0" prefWidth="199.0" />
     </children>
 </AnchorPane>
