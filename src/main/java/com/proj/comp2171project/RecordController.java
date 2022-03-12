@@ -202,6 +202,7 @@ public class RecordController {
         //System.out.println(medicalDate.getValue());
         String query = "INSERT INTO guardsdb VALUES (" + id + ",'" + fname + "','" + lname +"','" + company +"','" + contact +"','" + medicalDate.getValue()
                         +"','" + medicalPath +"','" + psraDate.getValue() +"','" + polRecDate.getValue() +"')";
+
         executeQuery(query);
     }
 

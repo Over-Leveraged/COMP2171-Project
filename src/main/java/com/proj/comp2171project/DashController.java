@@ -17,6 +17,9 @@ import java.io.IOException;
 public class DashController {
 
     @FXML
+    private Button btnEdit;
+
+    @FXML
     private Button btnAudit;
 
     @FXML
@@ -47,11 +50,27 @@ public class DashController {
     private Scene scene;
     private Parent root;
 
+    private Stage stage2;
+    private Scene scene2;
+    private Parent root2;
+
    /* public void handleClick(ActionEvent event){
         if (event.getSource() == btnNew){
             switchToNew(event);
         }
     }*/
+   @FXML
+   public void switchToEdit(ActionEvent event) throws IOException {
+       Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
+       //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+       stage2 = (Stage)((Node)event.getSource()).getScene().getWindow();
+       scene2 = new Scene(root2, 950, 600);
+       stage2.setScene(scene2);
+       stage2.show();
+       System.out.println("Test");
+
+   }
+
     @FXML
     public void switchToNew(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -70,6 +89,7 @@ public class DashController {
         System.out.println("Test");
 
     }
+
 
 
 }

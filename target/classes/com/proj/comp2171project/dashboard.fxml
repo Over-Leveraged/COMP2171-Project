@@ -18,7 +18,7 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="160.0" style="-fx-background-color: #5082a1;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="110.0" prefWidth="160.0">
+            <Pane prefHeight="110.0" prefWidth="160.0" style="-fx-background-color: purple;">
                <children>
                   <Text fill="WHITE" layoutX="6.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="GDB SYSTEM">
                      <font>
@@ -27,6 +27,17 @@
                   </Text>
                </children>
             </Pane>
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
             <Button fx:id="btnNew" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToNew" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="New Record" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
@@ -38,7 +49,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">
+            <Button fx:id="btnEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToEdit" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Edit Record" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -125,7 +136,7 @@
             </GridPane>
          </children>
       </VBox>
-      <Pane layoutX="159.0" prefHeight="110.0" prefWidth="832.0" style="-fx-background-color: #5082a1;">
+      <Pane layoutX="159.0" prefHeight="110.0" prefWidth="832.0" style="-fx-background-color: purple;">
          <children>
             <Text fx:id="lbLocation" fill="WHITE" layoutX="44.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Home">
                <font>
