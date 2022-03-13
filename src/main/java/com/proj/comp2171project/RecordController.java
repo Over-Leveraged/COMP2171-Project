@@ -221,12 +221,41 @@ public class RecordController {
     public void switchToHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 950, 600);
+        scene = new Scene(root, 990, 600);
         scene.getStylesheets().add("theme.css");
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
     }
+    @FXML
+    public void switchToEdit(ActionEvent event) throws IOException {
+        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root2, 990, 600);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+
+    }
+
+    @FXML
+    public void switchToNew(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
+        scene = new Scene(root, 990, 600);
+        //stage.setScene();
+        //scene.getStylesheets().add("theme.css");
+        //stage.setTitle("GBD Dash");
+        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+
+    }
+
 }
 
    /* public ObservableList<Records> getRecords(){

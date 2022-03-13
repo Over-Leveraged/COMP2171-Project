@@ -13,12 +13,10 @@
 	-fx-font-size: 14;
 	-fx-background-radius: 4;
 	-fx-border-radius: 10;
-	-fx-pref-height: 30;
-	-fx-min-width: 30;
+
     -fx-background-color: #008CBA;
     -fx-border-radius: 10px;
-    -fx-height: 40px;
-    -fx-width: 150px;
+
     -fx-border-style: none;
     -fx-outline-style: none;
     -fx-transition: all 0.5s;

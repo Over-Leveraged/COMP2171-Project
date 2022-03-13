@@ -12,9 +12,9 @@ public class MainDriver extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 990, 600);
         stage.setTitle("GBD Dash");
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
         scene.getStylesheets().add("dashstyles.css");

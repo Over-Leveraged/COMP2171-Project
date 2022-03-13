@@ -5,14 +5,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -60,6 +66,10 @@ public class ManagementController implements Initializable {
 
     @FXML
     private Button updateBtn;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @FXML
     void onButtonClick(ActionEvent event) {
@@ -211,6 +221,44 @@ public class ManagementController implements Initializable {
         lnTF.clear();
         companyTF.clear();
         conTF.clear();
+    }
+    @FXML
+    public void switchToHome(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 950, 600);
+        scene.getStylesheets().add("theme.css");
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+    }
+    @FXML
+    public void switchToEdit(ActionEvent event) throws IOException {
+        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root2, 990, 600);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+
+    }
+
+    @FXML
+    public void switchToNew(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
+        scene = new Scene(root, 990, 600);
+        //stage.setScene();
+        //scene.getStylesheets().add("theme.css");
+        //stage.setTitle("GBD Dash");
+        //stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+
     }
 }
 

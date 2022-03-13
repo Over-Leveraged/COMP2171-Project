@@ -1,48 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.ManagementController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.ManagementController">
    <children>
-      <VBox layoutX="140.0" layoutY="80.0" prefHeight="247.0" prefWidth="210.0" spacing="20.0" style="-fx-background-color: default;">
+
+      <AnchorPane layoutX="160.0" layoutY="68.0" prefHeight="645.0" prefWidth="826.0" style="-fx-background-color: white;"><children>
+
+         <VBox layoutX="112.0" layoutY="86.0" prefHeight="247.0" prefWidth="210.0" spacing="20.0" style="-fx-background-color: default;">
+            <children>
+               <TextField fx:id="idTF" stylesheets="@../../../theme.css" />
+               <TextField fx:id="fnTF" stylesheets="@../../../theme.css" />
+               <TextField fx:id="lnTF" prefHeight="25.0" prefWidth="229.0" stylesheets="@../../../theme.css" />
+               <TextField fx:id="companyTF" stylesheets="@../../../theme.css" />
+               <TextField fx:id="conTF" stylesheets="@../../../theme.css" />
+            </children>
+         </VBox>
+         <VBox layoutX="347.0" layoutY="83.0" prefHeight="390.0" prefWidth="451.0">
+            <children>
+               <TableView fx:id="recordView" prefHeight="390.0" prefWidth="451.0" stylesheets="@../../../theme.css">
+                  <columns>
+                     <TableColumn fx:id="colId" prefWidth="58.0" text="ID" />
+                     <TableColumn fx:id="colFn" prefWidth="99.0" text="First Name" />
+                     <TableColumn fx:id="colLn" prefWidth="104.0" text="Last Name" />
+                     <TableColumn fx:id="colCom" prefWidth="76.0" text="Company" />
+                     <TableColumn fx:id="colCon" prefWidth="113.0" text="Contact" />
+                  </columns>
+               </TableView>
+            </children>
+         </VBox>
+         <VBox layoutX="37.0" layoutY="86.0" prefHeight="230.0" prefWidth="75.0" spacing="28.0" style="-fx-background-color: default;">
+            <children>
+               <Label text="ID" />
+               <Label text="First Name" />
+               <Label text="Last Name" />
+               <Label text="Company" />
+               <Label text="Contact" />
+            </children>
+         </VBox>
+         <Button fx:id="updateBtn" layoutX="267.0" layoutY="355.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" stylesheets="@../../../theme.css" text="Update" textFill="WHITE" />
+         <Button fx:id="deleteBtn" layoutX="145.0" layoutY="355.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" stylesheets="@../../../theme.css" text="Delete" textFill="WHITE" />
+         <Button fx:id="insertBtn" layoutX="29.0" layoutY="355.0" mnemonicParsing="false" onAction="#onButtonClick" stylesheets="@../../../theme.css" text="Insert" textFill="WHITE" />
+      </children></AnchorPane>
+      <VBox layoutY="69.0" prefHeight="645.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="69.0">
          <children>
-            <TextField fx:id="idTF" />
-            <TextField fx:id="fnTF" />
-            <TextField fx:id="lnTF" prefHeight="25.0" prefWidth="229.0" />
-            <TextField fx:id="companyTF" />
-            <TextField fx:id="conTF" />
+            <Pane prefHeight="67.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToHome" prefHeight="54.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="19.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-home" iconSize="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnNew" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToNew" prefHeight="44.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="New Record" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fltfal-add-square-24" iconSize="24" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToEdit" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Edit Record" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-user-edit" iconSize="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="far-calendar-alt" iconSize="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnNotify" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Send Mail" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-mail-bulk" iconSize="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnAudit" alignment="BASELINE_LEFT" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Generate Audit" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-network-wired" iconSize="20" />
+               </graphic>
+            </Button>
+            <Button fx:id="btnUsers" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Users" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-users" iconSize="20" />
+               </graphic>
+            </Button>
+            <Pane prefHeight="152.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />
+            <Button fx:id="btnAudit1" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Logout" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-power-off" iconSize="20" />
+               </graphic>
+            </Button>
          </children>
       </VBox>
-      <VBox layoutX="375.0" layoutY="77.0" prefHeight="390.0" prefWidth="451.0">
+      <FontIcon layoutX="232.0" layoutY="158.0" />
+      <HBox prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">
          <children>
-            <TableView fx:id="recordView" prefHeight="390.0" prefWidth="451.0">
-              <columns>
-                <TableColumn fx:id="colId" prefWidth="58.0" text="ID" />
-                <TableColumn fx:id="colFn" prefWidth="99.0" text="First Name" />
-                  <TableColumn fx:id="colLn" prefWidth="104.0" text="Last Name" />
-                  <TableColumn fx:id="colCom" prefWidth="76.0" text="Company" />
-                  <TableColumn fx:id="colCon" prefWidth="113.0" text="Contact" />
-              </columns>
-            </TableView>
+            <Pane prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">
+               <children>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-bezier-curve" iconSize="35" layoutX="25.0" layoutY="49.0" text="" />
+                  <Label layoutX="82.0" layoutY="18.0" style="-fx-font-weight: bold; -fx-font-family: 'Brush Script MT', cursive;" text="GMDB SYSTEM" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
-      </VBox>
-      <VBox layoutX="65.0" layoutY="80.0" prefHeight="230.0" prefWidth="75.0" spacing="28.0" style="-fx-background-color: default;">
-         <children>
-            <Label text="ID" />
-            <Label text="First Name" />
-            <Label text="Last Name" />
-            <Label text="Company" />
-            <Label text="Contact" />
-         </children>
-      </VBox>
-      <Button fx:id="updateBtn" layoutX="295.0" layoutY="349.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" text="Update" />
-      <Button fx:id="deleteBtn" layoutX="173.0" layoutY="349.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" text="Delete" />
-      <Button fx:id="insertBtn" layoutX="57.0" layoutY="349.0" mnemonicParsing="false" onAction="#onButtonClick" text="Insert" />
+      </HBox>
    </children>
 </AnchorPane>
