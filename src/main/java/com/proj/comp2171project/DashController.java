@@ -64,7 +64,7 @@ public class DashController {
        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
        stage2 = (Stage)((Node)event.getSource()).getScene().getWindow();
-       scene2 = new Scene(root2, 990, 600);
+       scene2 = new Scene(root2, 990, 710);
        stage2.setScene(scene2);
        stage2.show();
        System.out.println("Test");
@@ -77,7 +77,7 @@ public class DashController {
         //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
-        scene = new Scene(root, 990, 600);
+        scene = new Scene(root, 990, 710);
         //stage.setScene();
         //scene.getStylesheets().add("theme.css");
         //stage.setTitle("GBD Dash");

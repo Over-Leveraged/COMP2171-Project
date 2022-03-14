@@ -21,18 +21,28 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ManagementController implements Initializable {
 
     @FXML
-    private TableColumn<ModelTabel,String> colCom;
+    private TableColumn<Recordss,String> colCom;
 
     @FXML
     private TextField companyTF;
 
     @FXML
-    private TableColumn<ModelTabel,String> colCon;
+    private TableColumn<Recordss,String> colCon;
+
+    @FXML
+    private TableColumn<Recordss, Date> colMed;
+
+    @FXML
+    private TableColumn<Recordss, Date> colPSRA;
+
+    @FXML
+    private TableColumn<Recordss, Date> colPolice;
 
     @FXML
     private TextField conTF;
@@ -41,13 +51,13 @@ public class ManagementController implements Initializable {
     private Button deleteBtn;
 
     @FXML
-    private TableColumn<ModelTabel,String> colFn;
+    private TableColumn<Recordss,String> colFn;
 
     @FXML
     private TextField fnTF;
 
     @FXML
-    private TableColumn<ModelTabel,Integer> colId;
+    private TableColumn<Recordss,Integer> colId;
 
     @FXML
     private TextField idTF;
@@ -56,13 +66,13 @@ public class ManagementController implements Initializable {
     private Button insertBtn;
 
     @FXML
-    private TableColumn<ModelTabel,String> colLn;
+    private TableColumn<Recordss,String> colLn;
 
     @FXML
     private TextField lnTF;
 
     @FXML
-    private TableView<ModelTabel> recordView;
+    private TableView<Recordss> recordView;
 
     @FXML
     private Button updateBtn;
@@ -148,7 +158,7 @@ public class ManagementController implements Initializable {
             e.printStackTrace();
         }
     }
-    ObservableList<ModelTabel> oblist = FXCollections.observableArrayList();
+    ObservableList<Recordss> oblist = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -158,8 +168,10 @@ public class ManagementController implements Initializable {
         try {
             ResultSet result = conn.createStatement().executeQuery("select * from guardsdb");
             while(result.next()){
-                oblist.add(new ModelTabel(result.getInt("id"),result.getString("fname"),
-                        result.getString("lname"),result.getString("company"),result.getString("contact")));
+                oblist.add(new Recordss(result.getInt("id"),result.getString("fname"),
+                        result.getString("lname"),result.getString("company"),
+                        result.getString("contact"),result.getDate("medical_exp"),
+                        result.getDate("psra_exp"),(result.getDate("police_rec_exp"))));
             }
 
         } catch (SQLException e) {
@@ -171,6 +183,9 @@ public class ManagementController implements Initializable {
         colLn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         colCom.setCellValueFactory(new PropertyValueFactory<>("company"));
         colCon.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
 
         recordView.setItems(oblist);
         setCellValue();
@@ -184,8 +199,10 @@ public class ManagementController implements Initializable {
         try {
             ResultSet result = conn.createStatement().executeQuery("select * from guardsdb");
             while(result.next()){
-                oblist.add(new ModelTabel(result.getInt("id"),result.getString("fname"),
-                        result.getString("lname"),result.getString("company"),result.getString("contact")));
+                oblist.add(new Recordss(result.getInt("id"),result.getString("fname"),
+                        result.getString("lname"),result.getString("company"),
+                        result.getString("contact"),result.getDate("medical_exp"),
+                        result.getDate("psra_exp"),(result.getDate("police_rec_exp"))));
             }
 
         } catch (SQLException e) {
@@ -197,8 +214,12 @@ public class ManagementController implements Initializable {
         colLn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         colCom.setCellValueFactory(new PropertyValueFactory<>("company"));
         colCon.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
 
         recordView.setItems(oblist);
+        setCellValue();
 
     }
 
@@ -206,7 +227,7 @@ public class ManagementController implements Initializable {
         recordView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                ModelTabel mt = recordView.getItems().get(recordView.getSelectionModel().getSelectedIndex());
+                Recordss mt = recordView.getItems().get(recordView.getSelectionModel().getSelectedIndex());
                 idTF.setText(String.valueOf(mt.getId()));
                 fnTF.setText(mt.getFirstname());
                 lnTF.setText(mt.getLastname());
@@ -226,7 +247,7 @@ public class ManagementController implements Initializable {
     public void switchToHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 950, 600);
+        scene = new Scene(root, 950, 710);
         scene.getStylesheets().add("theme.css");
         stage.setScene(scene);
         stage.show();
@@ -237,7 +258,7 @@ public class ManagementController implements Initializable {
         Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
         //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root2, 990, 600);
+        scene = new Scene(root2, 990, 710);
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
@@ -250,11 +271,7 @@ public class ManagementController implements Initializable {
         //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
-        scene = new Scene(root, 990, 600);
-        //stage.setScene();
-        //scene.getStylesheets().add("theme.css");
-        //stage.setTitle("GBD Dash");
-        //stage.initStyle(StageStyle.UNDECORATED);
+        scene = new Scene(root, 990, 710);
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
