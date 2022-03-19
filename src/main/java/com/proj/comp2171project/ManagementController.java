@@ -2,6 +2,8 @@ package com.proj.comp2171project;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,19 +12,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
+
+
+
 
 public class ManagementController implements Initializable {
 
@@ -57,13 +66,22 @@ public class ManagementController implements Initializable {
     private TextField fnTF;
 
     @FXML
+    private TextField tfSearch;
+
+    @FXML
     private TableColumn<Recordss,Integer> colId;
 
     @FXML
     private TextField idTF;
 
     @FXML
+    private Button btnExport;
+
+    @FXML
     private Button insertBtn;
+
+    @FXML
+    private Button btnRefresh;
 
     @FXML
     private TableColumn<Recordss,String> colLn;
@@ -80,6 +98,7 @@ public class ManagementController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private FileInputStream fileInputStream;
 
     @FXML
     void onButtonClick(ActionEvent event) {
@@ -102,6 +121,16 @@ public class ManagementController implements Initializable {
             updateRecord();
         }
     }
+    @FXML
+    void refreshBtnClick(ActionEvent event){
+        if (event.getSource() == btnRefresh){
+            System.out.println("Refreshed");
+            reloadtable();
+        }
+    }
+
+
+
 
     //Database Connection
     public Connection getConnection() {
@@ -116,12 +145,63 @@ public class ManagementController implements Initializable {
         }
     }
 
-    private void insertRecord(){
-        //String query = "INSERT INTO records(id,fname,lname,company) VALUES (" + tfid.getText() + "," + tfFname.getText() + "," + tfLname.getText() + "," + tfCompany.getText() +")";
-        String query = "INSERT INTO guardsdb VALUES (" + idTF.getText() + ",'" + fnTF.getText() + "','" + lnTF.getText() + "','" + companyTF.getText() +"','" + conTF.getText() +"')";
+    @FXML
+    void exportBtnClick(ActionEvent event) throws SQLException {
+        Connection conn = getConnection();
+        if (event.getSource() == btnExport){
+            System.out.println( "test");
+            try{
+                String query = "Select * from guardsdb";
+                PreparedStatement pst = conn.prepareStatement(query);
+                ResultSet rs = pst.executeQuery();
 
-        executeQuery(query);
-        reloadtable();
+                XSSFWorkbook wb = new XSSFWorkbook();
+                XSSFSheet sheet = wb.createSheet("Officer Details");
+                XSSFRow header = sheet.createRow(0);
+                header.createCell(0).setCellValue("id");
+                header.createCell(1).setCellValue("fname");
+                header.createCell(2).setCellValue("lname");
+                header.createCell(3).setCellValue("company");
+                header.createCell(4).setCellValue("contact");
+
+                int index = 1;
+                while(rs.next()){
+                    XSSFRow row = sheet.createRow(index);
+                    row.createCell(0).setCellValue(rs.getString("id"));
+                    row.createCell(1).setCellValue(rs.getString("fname"));
+                    row.createCell(2).setCellValue(rs.getString("lname"));
+                    row.createCell(3).setCellValue(rs.getString("company"));
+                    row.createCell(4).setCellValue(rs.getString("contact"));
+                    index++;
+                }
+
+                FileOutputStream fileOutputStream = new FileOutputStream("OfficerDetails.xlsx");
+                wb.write(fileOutputStream);
+                fileOutputStream.close();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Status");
+                alert.setHeaderText("Information Successfully Exported");
+                alert.setContentText("Press ok to continue");
+                alert.showAndWait();
+
+                pst.close();
+                rs.close();
+
+            }catch(SQLException | FileNotFoundException ex){
+                ex.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void insertRecord(){
+        //String query = "INSERT INTO guardsdb VALUES (" + idTF.getText() + ",'" + fnTF.getText() + "','" + lnTF.getText() + "','" + companyTF.getText() +"','" + conTF.getText() +"')";
+        //executeQuery(query);
+        //reloadtable();
+        System.out.println("Hi");
+        searchTable();
     }
 
     private void deleteRecord(){
@@ -131,21 +211,17 @@ public class ManagementController implements Initializable {
     }
 
     private void updateRecord(){
+        reloadtable();
         int id;
         String firstname,lastname,company,contact;
         reloadtable();
-        //id = idTF.getText();
         firstname = fnTF.getText();
         lastname = lnTF.getText();
         company = companyTF.getText();
         contact = conTF.getText();
-
-
         String query = "UPDATE guardsdb SET fname = '"+firstname+"', lname ='"+ lastname +"', company ='"+ company +"', contact ='"+ contact +"' where id = '"+idTF.getText()+"' ";
-        //String query = "UPDATE `guardsdb` SET `fname`='[value-2]',`lname`='[value-3]',`company`='[value-4]',`contact`='[value-5]',`medical_exp`='[value-6]' WHERE `id`= + idTF.getText()";
-        reloadtable();
-
         executeQuery(query);
+        reloadtable();
     }
 
     private void executeQuery(String query) {
@@ -158,12 +234,10 @@ public class ManagementController implements Initializable {
             e.printStackTrace();
         }
     }
-    ObservableList<Recordss> oblist = FXCollections.observableArrayList();
 
+    ObservableList<Recordss> oblist = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    //public void showrecord() {
-
         Connection conn = getConnection();
         try {
             ResultSet result = conn.createStatement().executeQuery("select * from guardsdb");
@@ -173,7 +247,6 @@ public class ManagementController implements Initializable {
                         result.getString("contact"),result.getDate("medical_exp"),
                         result.getDate("psra_exp"),(result.getDate("police_rec_exp"))));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,15 +259,54 @@ public class ManagementController implements Initializable {
         colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
-
         recordView.setItems(oblist);
         setCellValue();
 
     }
+
+    @FXML
+    public void switchToHome(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 950, 710);
+        scene.getStylesheets().add("theme.css");
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+    }
+
+    @FXML
+    public void switchToEdit(ActionEvent event) throws IOException {
+        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root2, 990, 710);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+
+    }
+
+    @FXML
+    public void switchToNew(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("RecordUi.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 990, 710);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Test");
+
+    }
+    private void clearCell(){
+        idTF.clear();
+        fnTF.clear();
+        lnTF.clear();
+        companyTF.clear();
+        conTF.clear();
+    }
+
+    //This method reloads the table whenever the record data is updated
     public void reloadtable(){
-
         recordView.getItems().clear();
-
         Connection conn = getConnection();
         try {
             ResultSet result = conn.createStatement().executeQuery("select * from guardsdb");
@@ -204,11 +316,9 @@ public class ManagementController implements Initializable {
                         result.getString("contact"),result.getDate("medical_exp"),
                         result.getDate("psra_exp"),(result.getDate("police_rec_exp"))));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colFn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         colLn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -217,10 +327,8 @@ public class ManagementController implements Initializable {
         colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
-
         recordView.setItems(oblist);
         setCellValue();
-
     }
 
     private void setCellValue(){
@@ -236,46 +344,33 @@ public class ManagementController implements Initializable {
             }
         });
     }
-    private void clearCell(){
-        idTF.clear();
-        fnTF.clear();
-        lnTF.clear();
-        companyTF.clear();
-        conTF.clear();
-    }
     @FXML
-    public void switchToHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 950, 710);
-        scene.getStylesheets().add("theme.css");
-        stage.setScene(scene);
-        stage.show();
-        System.out.println("Test");
-    }
-    @FXML
-    public void switchToEdit(ActionEvent event) throws IOException {
-        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root2, 990, 710);
-        stage.setScene(scene);
-        stage.show();
-        System.out.println("Test");
+    public void searchTable(){
 
-    }
+        FilteredList<Recordss> filteredData = new FilteredList<>(oblist, b -> true);
 
-    @FXML
-    public void switchToNew(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
-        scene = new Scene(root, 990, 710);
-        stage.setScene(scene);
-        stage.show();
-        System.out.println("Test");
+        tfSearch.textProperty().addListener((observable,oldValue,newValue) -> {
 
+            filteredData.setPredicate(recordss -> {
+
+                if (newValue== null || newValue.isEmpty()){
+                    return true;
+                }
+
+                String searchKeyword = newValue.toLowerCase();
+
+                if (recordss.getFirstname().toLowerCase().contains(searchKeyword)){
+                    return true;
+
+                }else if(recordss.getLastname().toLowerCase().contains(searchKeyword)){
+                    return true;
+                }else return recordss.getCompany().toLowerCase().contains(searchKeyword);
+            });
+        });
+
+        SortedList<Recordss> sortedList = new SortedList<>(filteredData);
+        sortedList.comparatorProperty().bind(recordView.comparatorProperty());
+        recordView.setItems(sortedList);
     }
 }
 

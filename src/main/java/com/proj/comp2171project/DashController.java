@@ -62,7 +62,7 @@ public class DashController {
    @FXML
    public void switchToEdit(ActionEvent event) throws IOException {
        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
-       //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+       //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("RecordUi.fxml"));
        stage2 = (Stage)((Node)event.getSource()).getScene().getWindow();
        scene2 = new Scene(root2, 990, 710);
        stage2.setScene(scene2);
@@ -73,8 +73,8 @@ public class DashController {
 
     @FXML
     public void switchToNew(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("RecordUi.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("RecordUi.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
         scene = new Scene(root, 990, 710);

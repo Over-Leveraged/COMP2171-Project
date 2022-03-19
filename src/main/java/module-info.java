@@ -10,6 +10,7 @@ module com.proj.comp2171project {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires org.apache.poi.ooxml;
 
     opens com.proj.comp2171project to javafx.fxml;
     exports com.proj.comp2171project;

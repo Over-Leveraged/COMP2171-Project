@@ -29,18 +29,18 @@
                <TextField fx:id="conTF" stylesheets="@../../../theme.css" />
             </children>
          </VBox>
-         <VBox layoutX="21.0" layoutY="19.0" prefHeight="327.0" prefWidth="774.0">
+         <VBox layoutX="59.0" layoutY="19.0" prefHeight="305.0" prefWidth="736.0">
                <children>
-               <TableView fx:id="recordView" prefHeight="291.0" prefWidth="744.0" stylesheets="@../../../theme.css">
+               <TableView fx:id="recordView" prefHeight="306.0" prefWidth="736.0" style="-fx-background-color: none; -fx-background-color: transparent;" stylesheets="@../../../theme.css">
                   <columns>
                      <TableColumn fx:id="colId" prefWidth="58.0" text="ID" />
                      <TableColumn fx:id="colFn" prefWidth="89.0" text="First Name" />
                      <TableColumn fx:id="colLn" prefWidth="100.0" text="Last Name" />
-                     <TableColumn fx:id="colCom" prefWidth="90.0" text="Company" />
-                     <TableColumn fx:id="colCon" prefWidth="113.0" text="Contact" />
-                        <TableColumn fx:id="colMed" prefWidth="113.0" text="Medical Expiry" />
-                        <TableColumn fx:id="colPSRA" prefWidth="100.0" text="PSRA Expiry" />
-                        <TableColumn fx:id="colPolice" prefWidth="110.0" text="Police Expiry" />
+                     <TableColumn fx:id="colCom" prefWidth="72.0" text="Company" />
+                     <TableColumn fx:id="colCon" prefWidth="107.0" text="Contact" />
+                        <TableColumn fx:id="colMed" prefWidth="111.0" text="Medical Expiry" />
+                        <TableColumn fx:id="colPSRA" minWidth="1.0" prefWidth="92.0" text="PSRA Expiry" />
+                        <TableColumn fx:id="colPolice" prefWidth="107.0" text="Police Expiry" />
                   </columns>
                </TableView>
                </children>
@@ -54,9 +54,15 @@
                <Label text="Contact" />
             </children>
          </VBox>
-         <Button fx:id="updateBtn" layoutX="128.0" layoutY="340.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" prefHeight="30.0" prefWidth="121.0" stylesheets="@../../../theme.css" text="Update" textFill="WHITE" />
-         <Button fx:id="deleteBtn" layoutX="268.0" layoutY="340.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="30.0" prefWidth="121.0" stylesheets="@../../../theme.css" text="Delete" textFill="WHITE" />
-         <Button fx:id="insertBtn" layoutX="38.0" layoutY="340.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="30.0" prefWidth="58.0" stylesheets="@../../../theme.css" text="Insert" textFill="WHITE" />
+         <Button fx:id="updateBtn" layoutX="131.0" layoutY="389.0" mnemonicParsing="false" onAction="#onUpdateButtonClick" prefHeight="30.0" prefWidth="121.0" stylesheets="@../../../theme.css" text="Update" textFill="WHITE">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fltral-document-edit-16" iconSize="16" />
+               </graphic></Button>
+         <Button fx:id="deleteBtn" layoutX="271.0" layoutY="389.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefHeight="30.0" prefWidth="121.0" stylesheets="@../../../theme.css" text="Delete" textFill="WHITE">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fltfmz-person-delete-20" iconSize="16" />
+               </graphic></Button>
+         <Button fx:id="insertBtn" layoutX="40.0" layoutY="389.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="30.0" prefWidth="64.0" stylesheets="@../../../theme.css" text="Insert" textFill="WHITE" />
             <MenuButton layoutX="38.0" layoutY="447.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="356.0" stylesheets="@../../../theme.css" text="Add To Batch" textFill="WHITE">
               <items>
                 <MenuItem mnemonicParsing="false" text="Training Batch 1" />
@@ -69,6 +75,22 @@
                   <MenuItem mnemonicParsing="false" text="Training Batch 2" />
                </items>
             </MenuButton>
+            <Button fx:id="btnRefresh" layoutX="12.0" layoutY="19.0" mnemonicParsing="false" onAction="#refreshBtnClick" prefHeight="25.0" prefWidth="36.0" stylesheets="@../../../theme.css">
+               <graphic>
+                  <FontIcon iconColor="#fcfcfc" iconLiteral="fltral-arrow-clockwise-24" iconSize="20" text="" />
+               </graphic>
+            </Button>
+            <Pane layoutX="42.0" layoutY="333.0" prefHeight="42.0" prefWidth="356.0">
+               <children>
+                  <Button fx:id="btnSearch" layoutY="7.0" mnemonicParsing="false" onAction="#refreshBtnClick" prefHeight="25.0" prefWidth="36.0" stylesheets="@../../../theme.css">
+                     <graphic>
+                        <FontIcon iconColor="#eeeeee" iconLiteral="fas-search" iconSize="16" />
+                     </graphic>
+                  </Button>
+                  <TextField fx:id="tfSearch" layoutX="36.0" layoutY="6.0" onAction="#searchTable" prefHeight="30.0" prefWidth="312.0" />
+               </children>
+            </Pane>
+            <Button fx:id="btnExport" layoutX="155.0" layoutY="550.0" mnemonicParsing="false" onAction="#exportBtnClick" text="Export" />
       </children></AnchorPane>
       <VBox layoutY="69.0" prefHeight="645.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="69.0">
          <children>

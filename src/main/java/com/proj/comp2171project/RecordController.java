@@ -162,20 +162,13 @@ public class RecordController {
         }
     }
 
-
     public void initialize(URL url,ResourceBundle rb){
         lstFile = new ArrayList<>();
         lstFile.add("*.doc");
         lstFile.add("*.docx");
         lstFile.add("*.DOC");
         lstFile.add("*.DOCX");
-        //lstFile.add("*.pdf");
     }
-
-    //public void initialize(URL url, ResourceBundle rb) {
-    //showRecords();
-
-    //}
 
     public Connection getConnection() {
         Connection conn;
@@ -198,12 +191,11 @@ public class RecordController {
         medicalPath = tfMedical.getText();
         policePath = tfPolR.getText();
         psraPath = tfPSRA.getText();
-        //medExpiry = medicalDate;
-        //System.out.println(medicalDate.getValue());
-        String query = "INSERT INTO guardsdb VALUES (" + id + ",'" + fname + "','" + lname +"','" + company +"','" + contact +"','" + medicalDate.getValue()
+        String query = "INSERT INTO guardsdb VALUES (" + id + ",'" + fname + "','" + lname +"','"
+                        + company +"','" + contact +"','" + medicalDate.getValue()
                         +"','" + medicalPath +"','" + psraDate.getValue() +"','" + polRecDate.getValue() +"')";
-
         executeQuery(query);
+        clearCell();
     }
 
     private void executeQuery(String query) {
@@ -216,7 +208,7 @@ public class RecordController {
             e.printStackTrace();
         }
     }
-    //ADD home button
+
     @FXML
     public void switchToHome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
@@ -225,72 +217,32 @@ public class RecordController {
         scene.getStylesheets().add("theme.css");
         stage.setScene(scene);
         stage.show();
-        System.out.println("Test");
     }
     @FXML
     public void switchToEdit(ActionEvent event) throws IOException {
         Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root2, 990, 710);
         stage.setScene(scene);
         stage.show();
-        System.out.println("Test");
-
     }
 
     @FXML
     public void switchToNew(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("hello-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("RecordUi.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //Scene scene = new Scene(fxmlLoader.load(), 950, 600); My method
         scene = new Scene(root, 990, 710);
-        //stage.setScene();
-        //scene.getStylesheets().add("theme.css");
-        //stage.setTitle("GBD Dash");
-        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
-        System.out.println("Test");
-
     }
-
+    private void clearCell(){
+        tfid.clear();
+        tfFname.clear();
+        tfLname.clear();
+        tfCompany.clear();
+        tfContact.clear();
+        tfPolR.clear();
+        tfPSRA.clear();
+        tfMedical.clear();
+    }
 }
-
-   /* public ObservableList<Records> getRecords(){
-        ObservableList<Records> recordList = FXCollections.observableArrayList();
-        Connection conn = getConnection();
-        String query = "select * from records";
-        Statement st;
-        ResultSet result;
-        try{
-            st = conn.createStatement();
-            result = st.executeQuery(query);
-            Records records;
-            while(result.next()){
-                records = new Records(result.getInt("id"),result.getString("fname"),result.getString("lname"),result.getString("company"));
-                recordList.add(records);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-
-        }
-        return recordList;
-
-    }
-
-    public void showRecords(){
-
-        ObservableList<Records> list =  getRecords();
-
-        colID.setCellValueFactory(new PropertyValueFactory<Records, Integer>("id"));
-        colFname.setCellValueFactory(new PropertyValueFactory<Records, String>("fname"));
-        colLname.setCellValueFactory(new PropertyValueFactory<Records, String>("lname"));
-        colCompany.setCellValueFactory(new PropertyValueFactory<Records, String>("company"));
-
-        tableRecords.setItems(list);
-    }
-
-
-    } **/
