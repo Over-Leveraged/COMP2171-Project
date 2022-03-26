@@ -11,6 +11,7 @@ module com.proj.comp2171project {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires org.apache.poi.ooxml;
+    requires java.mail;
 
     opens com.proj.comp2171project to javafx.fxml;
     exports com.proj.comp2171project;
