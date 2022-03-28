@@ -15,8 +15,6 @@ public class Recordss {
         this.contact = contact;
     }
 
-
-
     public Recordss(int id, String firstname, String lastname, String company, String contact, Date med_exp,Date psra_exp,Date pol_exp) {
         this.id = id;
         this.firstname = firstname;

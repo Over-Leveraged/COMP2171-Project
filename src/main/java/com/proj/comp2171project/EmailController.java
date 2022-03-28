@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 
 import javax.mail.MessagingException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class EmailController implements Initializable {
@@ -28,6 +29,9 @@ public class EmailController implements Initializable {
 
     @FXML
     private Button btnNew;
+
+    @FXML
+    private Button generateMessage;
 
     @FXML
     private Button btnNotify;
@@ -61,27 +65,40 @@ public class EmailController implements Initializable {
     void switchToNew(ActionEvent event) {
 
     }
-    private String [] reasons ={"Documents","Re-Training"};
+    private String [] reasons ={"Documents","Re-Training","Custom"};
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         bxObjective.getItems().addAll(reasons);
+        bxObjective.setValue("Custom");
 
     }
+
     @FXML
     void onButtonClick(ActionEvent event) throws MessagingException {
         System.out.println("insert Clicked ME!!");
         if (event.getSource() == btnEmail) {
-            //System.out.println("Email Clicked");
             String receipient = tfReceipient.getText();
             String subject = tfSubject.getText();
             String message = taMsg.getText();
-            //System.out.println(subj);
-            //System.out.println(receipient);
-            //System.out.println(message);
             Email.sendMail("swenProjectEmailer@gmail.com",subject,message);
+        }
+    }
+
+    @FXML
+   void getChoice(ActionEvent event){
+        String choice = bxObjective.getValue();
+        System.out.println(choice);
+        if (Objects.equals(choice, "Documents")){
+            tfSubject.setText("Documents Outstanding");
+            taMsg.setText("Dear [Name Plate], /nYou have Documents Outstanding or Expired, please bring them to our location at [Address] as soon as possible /n/nRegards, /nAkiel Walsh");
+        }else if (Objects.equals(choice, "Re-Training")){
+            tfSubject.setText("Re-Training Scheduled");
+            taMsg.setText("Dear [Name Plate], /nYour retraining is being scheduled for [Date] /n/nRegards, /nAkiel Walsh");
+        }else if (Objects.equals(choice, "Custom")){
+            tfSubject.setText("");
+            taMsg.setText("");
         }
     }
 

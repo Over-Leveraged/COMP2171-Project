@@ -129,9 +129,6 @@ public class ManagementController implements Initializable {
         }
     }
 
-
-
-
     //Database Connection
     public Connection getConnection() {
         Connection conn;
@@ -261,7 +258,6 @@ public class ManagementController implements Initializable {
         colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         recordView.setItems(oblist);
         setCellValue();
-
     }
 
     @FXML
@@ -294,7 +290,6 @@ public class ManagementController implements Initializable {
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
-
     }
     private void clearCell(){
         idTF.clear();
@@ -344,24 +339,19 @@ public class ManagementController implements Initializable {
             }
         });
     }
+
+    // Allows the table to be searchable, essentially just recreates the ta
     @FXML
     public void searchTable(){
-
         FilteredList<Recordss> filteredData = new FilteredList<>(oblist, b -> true);
-
         tfSearch.textProperty().addListener((observable,oldValue,newValue) -> {
-
             filteredData.setPredicate(recordss -> {
-
                 if (newValue== null || newValue.isEmpty()){
                     return true;
                 }
-
                 String searchKeyword = newValue.toLowerCase();
-
                 if (recordss.getFirstname().toLowerCase().contains(searchKeyword)){
                     return true;
-
                 }else if(recordss.getLastname().toLowerCase().contains(searchKeyword)){
                     return true;
                 }else return recordss.getCompany().toLowerCase().contains(searchKeyword);

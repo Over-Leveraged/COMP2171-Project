@@ -2,11 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -14,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.EmailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.DashController">
     <children>
         <VBox layoutY="69.0" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="69.0">
             <children>
@@ -149,44 +145,5 @@
                 </Pane>
             </children>
         </HBox>
-      <Pane layoutX="159.0" layoutY="70.0" prefHeight="644.0" prefWidth="831.0">
-         <children>
-            <Label layoutX="18.0" layoutY="26.0" prefHeight="35.0" prefWidth="88.0" style="-fx-font-weight: bold;" text="Email">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="23.0" layoutY="189.0" text="Subject">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="23.0" layoutY="142.0" text="Receipient ">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="23.0" layoutY="246.0" text="Message">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tfReceipient" layoutX="111.0" layoutY="142.0" prefHeight="25.0" prefWidth="525.0" />
-            <TextField fx:id="tfSubject" layoutX="111.0" layoutY="189.0" prefHeight="25.0" prefWidth="525.0" />
-            <Label layoutX="23.0" layoutY="97.0" text="Objective">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="bxObjective" layoutX="111.0" layoutY="97.0" prefHeight="25.0" prefWidth="160.0" stylesheets="@../../../theme.css">
-               <tooltip>
-                  <Tooltip text="Hover here" />
-               </tooltip>
-            </ChoiceBox>
-            <Button fx:id="btnEmail" layoutX="111.0" layoutY="578.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="25.0" prefWidth="128.0" stylesheets="@../../../theme.css" text="Send Email" textFill="WHITE" />
-            <TextArea fx:id="taMsg" layoutX="111.0" layoutY="246.0" prefHeight="273.0" prefWidth="525.0" />
-            <Button fx:id="generateMessage" layoutX="246.0" layoutY="578.0" mnemonicParsing="false" onAction="#getChoice" prefHeight="25.0" prefWidth="128.0" stylesheets="@../../../theme.css" text="Load Message" textFill="WHITE" />
-         </children>
-      </Pane>
     </children>
 </AnchorPane>
