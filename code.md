@@ -1,327 +1,327 @@
-[//]: # (<?xml version="1.0" encoding="UTF-8"?>)
+<?xml version="1.0" encoding="UTF-8"?>
 
-[//]: # ()
-[//]: # (<?import javafx.geometry.Insets?>)
 
-[//]: # (<?import javafx.scene.control.Button?>)
+<?import javafx.geometry.Insets?>
 
-[//]: # (<?import javafx.scene.control.DatePicker?>)
+<?import javafx.scene.control.Button?>
 
-[//]: # (<?import javafx.scene.control.Label?>)
+<?import javafx.scene.control.DatePicker?>
 
-[//]: # (<?import javafx.scene.control.TextField?>)
+<?import javafx.scene.control.Label?>
 
-[//]: # (<?import javafx.scene.layout.AnchorPane?>)
+<?import javafx.scene.control.TextField?>
 
-[//]: # (<?import javafx.scene.layout.HBox?>)
+<?import javafx.scene.layout.AnchorPane?>
 
-[//]: # (<?import javafx.scene.layout.Pane?>)
+<?import javafx.scene.layout.HBox?>
 
-[//]: # (<?import javafx.scene.layout.VBox?>)
+<?import javafx.scene.layout.Pane?>
 
-[//]: # (<?import javafx.scene.text.Font?>)
+<?import javafx.scene.layout.VBox?>
 
-[//]: # (<?import org.kordamp.ikonli.javafx.FontIcon?>)
+<?import javafx.scene.text.Font?>
 
-[//]: # ()
-[//]: # (<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.DashController">)
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-[//]: # (    <children>)
 
-[//]: # (        <VBox layoutY="69.0" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="69.0">)
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.DashController">
 
-[//]: # (            <children>)
+    <children>
 
-[//]: # (                <Pane prefHeight="66.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />)
+        <VBox layoutY="69.0" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="69.0">
 
-[//]: # (                <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="44.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">)
+            <children>
 
-[//]: # (                    <opaqueInsets>)
+                <Pane prefHeight="66.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="44.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="19.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="19.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-home" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-home" iconSize="20" />
 
-[//]: # (                <Button fx:id="btnNew" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="New Record" textFill="WHITE">)
+                    </graphic>
 
-[//]: # (                    <opaqueInsets>)
+                </Button>
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnNew" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="New Record" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fltfal-add-square-24" iconSize="24" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fltfal-add-square-24" iconSize="24" />
 
-[//]: # (                <Button fx:id="btnEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Edit Record" textFill="WHITE">)
+                    </graphic>
 
-[//]: # (                    <opaqueInsets>)
+                </Button>
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Edit Record" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-user-edit" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-user-edit" iconSize="20" />
 
-[//]: # (                <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">)
+                    </graphic>
 
-[//]: # (                    <opaqueInsets>)
+                </Button>
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="far-calendar-alt" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="far-calendar-alt" iconSize="20" />
 
-[//]: # (                <Button fx:id="btnNotify" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Send Email" textFill="WHITE">)
+                    </graphic>
 
-[//]: # (                    <opaqueInsets>)
+                </Button>
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnNotify" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Send Email" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-mail-bulk" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-mail-bulk" iconSize="20" />
 
-[//]: # (                <Button fx:id="btnAudit" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text=" Audit" textFill="WHITE">)
+                    </graphic>
 
-[//]: # (                    <opaqueInsets>)
+                </Button>
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnAudit" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text=" Audit" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-network-wired" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-network-wired" iconSize="20" />
 
-[//]: # (                <Button fx:id="btnUsers" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Users" textFill="WHITE">)
+                    </graphic>
 
-[//]: # (                    <opaqueInsets>)
+                </Button>
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnUsers" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Users" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-users" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-users" iconSize="20" />
 
-[//]: # (                <Pane prefHeight="157.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />)
+                    </graphic>
 
-[//]: # (                <Button fx:id="btnAudit1" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Logout" textFill="WHITE">)
+                </Button>
 
-[//]: # (                    <opaqueInsets>)
+                <Pane prefHeight="157.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />
 
-[//]: # (                        <Insets />)
+                <Button fx:id="btnAudit1" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="45.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Logout" textFill="WHITE">
 
-[//]: # (                    </opaqueInsets>)
+                    <opaqueInsets>
 
-[//]: # (                    <padding>)
+                        <Insets />
 
-[//]: # (                        <Insets left="30.0" />)
+                    </opaqueInsets>
 
-[//]: # (                    </padding>)
+                    <padding>
 
-[//]: # (                    <font>)
+                        <Insets left="30.0" />
 
-[//]: # (                        <Font size="16.0" />)
+                    </padding>
 
-[//]: # (                    </font>)
+                    <font>
 
-[//]: # (                    <graphic>)
+                        <Font size="16.0" />
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-power-off" iconSize="20" />)
+                    </font>
 
-[//]: # (                    </graphic>)
+                    <graphic>
 
-[//]: # (                </Button>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-power-off" iconSize="20" />
 
-[//]: # (            </children>)
+                    </graphic>
 
-[//]: # (        </VBox>)
+                </Button>
 
-[//]: # (        <FontIcon layoutX="217.0" layoutY="116.0" />)
+            </children>
 
-[//]: # (        <HBox prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">)
+        </VBox>
 
-[//]: # (            <children>)
+        <FontIcon layoutX="217.0" layoutY="116.0" />
 
-[//]: # (                <Pane prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">)
+        <HBox prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">
 
-[//]: # (                    <children>)
+            <children>
 
-[//]: # (                        <FontIcon iconColor="WHITE" iconLiteral="fas-bezier-curve" iconSize="35" layoutX="25.0" layoutY="49.0" text="" />)
+                <Pane prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">
 
-[//]: # (                        <Label layoutX="82.0" layoutY="18.0" style="-fx-font-weight: bold; -fx-font-family: 'Brush Script MT', cursive;" text="GMDB SYSTEM" textFill="WHITE">)
+                    <children>
 
-[//]: # (                            <font>)
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-bezier-curve" iconSize="35" layoutX="25.0" layoutY="49.0" text="" />
 
-[//]: # (                                <Font size="24.0" />)
+                        <Label layoutX="82.0" layoutY="18.0" style="-fx-font-weight: bold; -fx-font-family: 'Brush Script MT', cursive;" text="GMDB SYSTEM" textFill="WHITE">
 
-[//]: # (                            </font>)
+                            <font>
 
-[//]: # (                        </Label>)
+                                <Font size="24.0" />
 
-[//]: # (                    </children>)
+                            </font>
 
-[//]: # (                </Pane>)
+                        </Label>
 
-[//]: # (            </children>)
+                    </children>
 
-[//]: # (        </HBox>)
+                </Pane>
 
-[//]: # (      <TextField fx:id="tfBatchNumber" layoutX="246.0" layoutY="219.0" prefHeight="25.0" prefWidth="191.0" />)
+            </children>
 
-[//]: # (      <Label layoutX="246.0" layoutY="196.0" text="Batch Number" />)
+        </HBox>
 
-[//]: # (      <DatePicker fx:id="tfTrainingDate" layoutX="571.0" layoutY="218.0" prefHeight="25.0" prefWidth="205.0" />)
+      <TextField fx:id="tfBatchNumber" layoutX="246.0" layoutY="219.0" prefHeight="25.0" prefWidth="191.0" />
 
-[//]: # (      <Label layoutX="571.0" layoutY="195.0" text="Date of Training" />)
+      <Label layoutX="246.0" layoutY="196.0" text="Batch Number" />
 
-[//]: # (      <TextField fx:id="tfTrainingName" layoutX="246.0" layoutY="308.0" prefHeight="25.0" prefWidth="191.0" />)
+      <DatePicker fx:id="tfTrainingDate" layoutX="571.0" layoutY="218.0" prefHeight="25.0" prefWidth="205.0" />
 
-[//]: # (      <Label layoutX="246.0" layoutY="281.0" text="Training Name" />)
+      <Label layoutX="571.0" layoutY="195.0" text="Date of Training" />
 
-[//]: # (      <TextField fx:id="tfTrainingLocation" layoutX="571.0" layoutY="309.0" prefHeight="25.0" prefWidth="205.0" />)
+      <TextField fx:id="tfTrainingName" layoutX="246.0" layoutY="308.0" prefHeight="25.0" prefWidth="191.0" />
 
-[//]: # (      <Label layoutX="571.0" layoutY="282.0" text="Training Location" />)
+      <Label layoutX="246.0" layoutY="281.0" text="Training Name" />
 
-[//]: # (      <Label layoutX="246.0" layoutY="111.0" text="Schedule Training">)
+      <TextField fx:id="tfTrainingLocation" layoutX="571.0" layoutY="309.0" prefHeight="25.0" prefWidth="205.0" />
 
-[//]: # (         <font>)
+      <Label layoutX="571.0" layoutY="282.0" text="Training Location" />
 
-[//]: # (            <Font size="25.0" />)
+      <Label layoutX="246.0" layoutY="111.0" text="Schedule Training">
 
-[//]: # (         </font>)
+         <font>
 
-[//]: # (      </Label>)
+            <Font size="25.0" />
 
-[//]: # (      <Button fx:id="btnSave" layoutX="246.0" layoutY="391.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="535.0" text="Save" textFill="WHITE" />)
+         </font>
 
-[//]: # (    </children>)
+      </Label>
 
-[//]: # (</AnchorPane>)
+      <Button fx:id="btnSave" layoutX="246.0" layoutY="391.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="535.0" text="Save" textFill="WHITE" />
+
+    </children>
+
+</AnchorPane>

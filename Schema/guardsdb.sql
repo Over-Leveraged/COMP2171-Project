@@ -39,6 +39,22 @@ CREATE TABLE `guardsdb` (
   `psra_exp` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE batch(batch_id VARCHAR(50) NOT NULL,training_name VARCHAR(250) ,location VARCHAR(255),date Date ,PRIMARY KEY(batch_id));
+INSERT INTO batch VALUE ("bc1000", "Retraining", "kingston", "2022-03-31");
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `fname` varchar(25) NOT NULL,
+  `lname` varchar(25) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY(id)
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO users VALUE ("1", "tahjay", "thompson", "test@gmail.com","ladnjahvbcdhbd");
+
 --
 -- Dumping data for table `guardsdb`
 --

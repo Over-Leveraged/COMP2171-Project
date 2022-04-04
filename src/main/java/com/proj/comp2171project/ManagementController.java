@@ -28,6 +28,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
@@ -288,6 +289,8 @@ public class ManagementController implements Initializable {
         stage.show();
         System.out.println("Test");
     }
+
+
     private void clearCell(){
         idTF.clear();
         fnTF.clear();
