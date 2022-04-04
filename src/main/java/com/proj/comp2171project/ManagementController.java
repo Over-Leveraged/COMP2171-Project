@@ -194,9 +194,6 @@ public class ManagementController implements Initializable {
     }
 
     private void insertRecord(){
-        //String query = "INSERT INTO guardsdb VALUES (" + idTF.getText() + ",'" + fnTF.getText() + "','" + lnTF.getText() + "','" + companyTF.getText() +"','" + conTF.getText() +"')";
-        //executeQuery(query);
-        //reloadtable();
         System.out.println("Hi");
         searchTable();
     }

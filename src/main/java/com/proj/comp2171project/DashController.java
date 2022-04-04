@@ -78,7 +78,7 @@ public class DashController {
     }*/
    @FXML
    public void switchToEdit(ActionEvent event) throws IOException {
-       Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("dashboard.fxml")));
+       Parent root2 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RecordManagement.fxml")));
        stage2 = (Stage)((Node)event.getSource()).getScene().getWindow();
        scene2 = new Scene(root2, 990, 710);
        stage2.setScene(scene2);
@@ -94,6 +94,17 @@ public class DashController {
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
+    }
+
+    @FXML
+    public void switchToSchedule(ActionEvent event) throws IOException {
+        System.out.println("Schedule Test");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("scheduleUi.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root, 990, 710);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 

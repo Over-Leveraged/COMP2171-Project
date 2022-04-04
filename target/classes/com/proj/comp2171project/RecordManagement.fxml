@@ -90,7 +90,7 @@
                   <TextField fx:id="tfSearch" layoutX="36.0" layoutY="6.0" onAction="#searchTable" prefHeight="30.0" prefWidth="312.0" />
                </children>
             </Pane>
-            <Button fx:id="btnExport" layoutX="155.0" layoutY="550.0" mnemonicParsing="false" onAction="#exportBtnClick" text="Export" />
+            <Button fx:id="btnExport" layoutX="37.0" layoutY="550.0" mnemonicParsing="false" onAction="#exportBtnClick" prefHeight="30.0" prefWidth="356.0" stylesheets="@../../../theme.css" text="Export" textFill="WHITE" />
       </children></AnchorPane>
       <VBox layoutY="69.0" prefHeight="645.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="69.0">
          <children>

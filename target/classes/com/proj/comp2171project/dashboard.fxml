@@ -60,7 +60,7 @@
                   <FontIcon iconColor="WHITE" iconLiteral="fas-user-edit" iconSize="20" />
                </graphic>
             </Button>
-            <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">
+            <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToSchedule" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -168,7 +168,7 @@
               <columns>
                 <TableColumn prefWidth="75.0" text="Date" />
                 <TableColumn prefWidth="93.0" text="Batch" />
-                  <TableColumn prefWidth="98.0" text="No. of Officers" />
+                  <TableColumn prefWidth="98.0" text="Name of Training" />
               </columns>
             </TableView>
          </children>
