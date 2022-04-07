@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.DashController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="713.0" prefWidth="990.0" style="-fx-background-color: white; -fx-border-radius: 10;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.ScheduleController">
     <children>
         <VBox layoutY="69.0" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="69.0">
             <children>
@@ -132,7 +134,7 @@
                 </Button>
             </children>
         </VBox>
-        <FontIcon layoutX="217.0" layoutY="116.0" />
+        <FontIcon layoutX="183.0" layoutY="115.0" />
         <HBox prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">
             <children>
                 <Pane prefHeight="70.0" prefWidth="990.0" style="-fx-background-color: #152132;">
@@ -147,19 +149,27 @@
                 </Pane>
             </children>
         </HBox>
-      <TextField fx:id="tfBatchNumber" layoutX="246.0" layoutY="219.0" prefHeight="25.0" prefWidth="191.0" />
-      <Label layoutX="246.0" layoutY="196.0" text="Batch Number" />
-      <DatePicker fx:id="tfTrainingDate" layoutX="571.0" layoutY="218.0" prefHeight="25.0" prefWidth="205.0" />
-      <Label layoutX="571.0" layoutY="195.0" text="Date of Training" />
-      <TextField fx:id="tfTrainingName" layoutX="246.0" layoutY="308.0" prefHeight="25.0" prefWidth="191.0" />
-      <Label layoutX="246.0" layoutY="281.0" text="Training Name" />
-      <TextField fx:id="tfTrainingLocation" layoutX="571.0" layoutY="309.0" prefHeight="25.0" prefWidth="205.0" />
-      <Label layoutX="571.0" layoutY="282.0" text="Training Location" />
-      <Label layoutX="246.0" layoutY="111.0" text="Schedule Training">
+      <TextField fx:id="tfBatchNumber" layoutX="217.0" layoutY="190.0" prefHeight="25.0" prefWidth="142.0" />
+      <Label layoutX="217.0" layoutY="167.0" text="Batch Number" />
+      <DatePicker fx:id="tfTrainingDate" layoutX="372.0" layoutY="189.0" prefHeight="25.0" prefWidth="153.0" />
+      <Label layoutX="372.0" layoutY="166.0" text="Date of Training" />
+      <TextField fx:id="tfTrainingName" layoutX="217.0" layoutY="254.0" prefHeight="25.0" prefWidth="142.0" />
+      <Label layoutX="217.0" layoutY="227.0" text="Training Name" />
+      <TextField fx:id="tfTrainingLocation" layoutX="372.0" layoutY="254.0" prefHeight="25.0" prefWidth="153.0" />
+      <Label layoutX="372.0" layoutY="227.0" text="Training Location" />
+      <Label layoutX="212.0" layoutY="110.0" text="Schedule Training" textFill="#0b1957">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnSave" layoutX="246.0" layoutY="391.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="535.0" text="Save" textFill="WHITE" />
+      <Button fx:id="btnSave" layoutX="217.0" layoutY="308.0" mnemonicParsing="false" onAction="#saveBtnClick" prefHeight="30.0" prefWidth="310.0" stylesheets="@../../../theme.css" text="Save" textFill="WHITE" />
+      <TableView fx:id="BatchViews" layoutX="566.0" layoutY="171.0" prefHeight="172.0" prefWidth="365.0" stylesheets="@../../../theme.css">
+         <columns>
+            <TableColumn fx:id="colBatch" prefWidth="62.0" text="Batch" />
+            <TableColumn fx:id="colBatchDate" prefWidth="93.0" text="Date" />
+            <TableColumn fx:id="colBatchName" prefWidth="93.0" text="Name" />
+            <TableColumn fx:id="colLocation" prefWidth="111.0" text="Location" />
+         </columns>
+      </TableView>
     </children>
 </AnchorPane>

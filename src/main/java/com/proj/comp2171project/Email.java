@@ -34,6 +34,7 @@ public class Email{
         message.setRecipient(Message.RecipientType.TO,new InternetAddress(recepient));
         message.setSubject(sub);
         message.setText(msg);
+
         return message;
     }
 

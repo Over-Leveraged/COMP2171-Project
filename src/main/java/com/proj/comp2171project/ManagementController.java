@@ -20,21 +20,26 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javax.mail.MessagingException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.*;
 import java.util.Date;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
 
 
+public class ManagementController implements Initializable{
+    //public class ManagementController implements Initializable {
 
+    @FXML
+    private ChoiceBox<String> choiceBatch;
 
-public class ManagementController implements Initializable {
+    @FXML
+    private ChoiceBox<String> choiceEmail;
 
     @FXML
     private TableColumn<Recordss,String> colCom;
@@ -82,6 +87,9 @@ public class ManagementController implements Initializable {
     private Button insertBtn;
 
     @FXML
+    private Button assignBtn;
+
+    @FXML
     private Button btnRefresh;
 
     @FXML
@@ -120,6 +128,28 @@ public class ManagementController implements Initializable {
         System.out.println("Update Click!!");
         if (event.getSource() == updateBtn) {
             updateRecord();
+        }
+    }
+    @FXML
+    void onAssignButtonClick(ActionEvent event) throws MessagingException {
+        System.out.println("Assign Click!!");
+        if (event.getSource() == assignBtn) {
+            assignBatch();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Email");
+            alert.setHeaderText("Would also like to send an email to the officer?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                //System.out.println("Send Email");
+                String newMsg = Notification.generateBatchNotification(choiceBatch.getValue(),fnTF.getText(),lnTF.getText());
+                Email.sendMail("swenProjectEmailer@gmail.com","Training-Date",newMsg);
+            }else{
+                System.out.println("Cancel");
+            }
+//            AlertBox.display("Send Notification",
+//                    "Would you also like to notify"+
+//                            fnTF.getText() + lnTF.getText()+"that they are being " +
+//                            "assigned to Batch"+ choiceBatch.getValue());
         }
     }
     @FXML
@@ -208,15 +238,32 @@ public class ManagementController implements Initializable {
     private void updateRecord(){
         reloadtable();
         int id;
-        String firstname,lastname,company,contact;
+        String firstname,lastname,company,contact,batchID;
         reloadtable();
         firstname = fnTF.getText();
         lastname = lnTF.getText();
         company = companyTF.getText();
         contact = conTF.getText();
-        String query = "UPDATE guardsdb SET fname = '"+firstname+"', lname ='"+ lastname +"', company ='"+ company +"', contact ='"+ contact +"' where id = '"+idTF.getText()+"' ";
+        batchID = "bc1001";
+        String query = "UPDATE guardsdb SET fname = '"+firstname+"', lname ='"+ lastname +"', company ='"+ company +"', contact ='"+ contact +"'" +
+                ", batch_id ='"+ batchID +"' where id = '"+idTF.getText()+"' ";
         executeQuery(query);
         reloadtable();
+    }
+
+    private void assignBatch(){
+        int id;
+        String firstname,lastname,company,contact,batchID;
+        reloadtable();
+        firstname = fnTF.getText();
+        lastname = lnTF.getText();
+        company = companyTF.getText();
+        contact = conTF.getText();
+        batchID = choiceBatch.getValue();
+        System.out.println(batchID);
+        String query = "UPDATE guardsdb SET fname = '"+firstname+"', lname ='"+ lastname +"', company ='"+ company +"', contact ='"+ contact +"'" +
+                ", batch_id ='"+ batchID +"' where id = '"+idTF.getText()+"' ";
+        executeQuery(query);
     }
 
     private void executeQuery(String query) {
@@ -229,10 +276,14 @@ public class ManagementController implements Initializable {
             e.printStackTrace();
         }
     }
+    ArrayList<String> batchChoice = new ArrayList<String>();
 
+    //private String [] reasons ={"Documents","Re-Training","Custom"};
     ObservableList<Recordss> oblist = FXCollections.observableArrayList();
-    @Override
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        System.out.println("Initialized");
         Connection conn = getConnection();
         try {
             ResultSet result = conn.createStatement().executeQuery("select * from guardsdb");
@@ -252,10 +303,26 @@ public class ManagementController implements Initializable {
         colCom.setCellValueFactory(new PropertyValueFactory<>("company"));
         colCon.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
-        colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
-        colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        colPolice.setCellValueFactory(new PropertyValueFactory<>("psra_exp"));
+        colPSRA.setCellValueFactory(new PropertyValueFactory<>("pol_exp"));
         recordView.setItems(oblist);
         setCellValue();
+
+        Connection conn2 = getConnection();
+        try {
+            ResultSet result = conn2.createStatement().executeQuery("select * from batch");
+            while (result.next()) {
+                batchChoice.add(result.getString("batch_id"));
+                System.out.println(batchChoice);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        batchChoice.add("Default");
+        choiceBatch.setValue("Default");
+        choiceBatch.getItems().addAll(batchChoice);
+
+
     }
 
     @FXML
@@ -267,6 +334,8 @@ public class ManagementController implements Initializable {
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
+        //DashController dcontroller = new DashController();
+        //dcontroller.loadtable();
     }
 
     @FXML
@@ -320,10 +389,9 @@ public class ManagementController implements Initializable {
         colCom.setCellValueFactory(new PropertyValueFactory<>("company"));
         colCon.setCellValueFactory(new PropertyValueFactory<>("contact"));
         colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
-        colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
-        colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        colPolice.setCellValueFactory(new PropertyValueFactory<>("psra_exp"));
+        colPSRA.setCellValueFactory(new PropertyValueFactory<>("pol_exp"));
         recordView.setItems(oblist);
-        setCellValue();
     }
 
     private void setCellValue(){
@@ -339,7 +407,6 @@ public class ManagementController implements Initializable {
             }
         });
     }
-
     // Allows the table to be searchable, essentially just recreates the ta
     @FXML
     public void searchTable(){
@@ -361,7 +428,10 @@ public class ManagementController implements Initializable {
         SortedList<Recordss> sortedList = new SortedList<>(filteredData);
         sortedList.comparatorProperty().bind(recordView.comparatorProperty());
         recordView.setItems(sortedList);
+
     }
+
+
 }
 
 

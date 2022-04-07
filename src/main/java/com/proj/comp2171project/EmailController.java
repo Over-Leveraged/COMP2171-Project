@@ -17,50 +17,36 @@ public class EmailController implements Initializable {
 
     @FXML
     private Button btnAudit;
-
     @FXML
     private Button btnAudit1;
-
     @FXML
     private Button btnEdit;
-
     @FXML
     private Button btnHome;
-
     @FXML
     private Button btnNew;
-
     @FXML
     private Button generateMessage;
-
     @FXML
     private Button btnNotify;
-
     @FXML
     private Button btnSchedule;
-
     @FXML
     private Button btnUsers;
-
     @FXML
     private Button btnEmail;
-
     @FXML
     private ChoiceBox<String> bxObjective;
     @FXML
     private TextArea taMsg;
-
     @FXML
     private TextField tfReceipient;
-
     @FXML
     private TextField tfSubject;
-
     @FXML
     void switchToEdit(ActionEvent event) {
 
     }
-
     @FXML
     void switchToNew(ActionEvent event) {
 
@@ -72,7 +58,6 @@ public class EmailController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bxObjective.getItems().addAll(reasons);
         bxObjective.setValue("Custom");
-
     }
 
     @FXML

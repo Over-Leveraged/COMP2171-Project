@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Recordss {
     int id;
-    String firstname,lastname,company,contact;
+    String firstname,lastname,company,contact,batchid;
     Date med_exp,psra_exp,pol_exp;
 
     public Recordss(int id, String firstname, String lastname, String company, String contact) {
@@ -22,6 +22,19 @@ public class Recordss {
         this.company = company;
         this.contact = contact;
         this.med_exp = med_exp;
+        this.psra_exp = psra_exp;
+        this.pol_exp = pol_exp;
+    }
+    public Recordss(int id, String firstname, String lastname, String company, String contact, Date med_exp,Date psra_exp,Date pol_exp,String batchid) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.company = company;
+        this.contact = contact;
+        this.med_exp = med_exp;
+        this.psra_exp = psra_exp;
+        this.pol_exp = pol_exp;
+        this.batchid = batchid;
     }
 
 
@@ -49,6 +62,7 @@ public class Recordss {
     public Date getMed_exp() {
         return med_exp;
     }
+
     public Date getPsra_exp() {
         return psra_exp;
     }
@@ -57,4 +71,11 @@ public class Recordss {
         return pol_exp;
     }
 
+    public String getBatchid() {
+        return batchid;
+    }
+
+    public void setBatchid(String batchid) {
+        this.batchid = batchid;
+    }
 }
