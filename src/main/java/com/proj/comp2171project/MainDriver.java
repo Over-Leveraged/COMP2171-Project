@@ -11,12 +11,9 @@ import java.io.IOException;
 public class MainDriver extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("EmailUi.fxml"));
-        // scene = new Scene(fxmlLoader.load(), 990, 710);
-        //Scene scene = new Scene(fxmlLoader.load(), 820, 487);
+        FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("auditUi.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 990, 710);
         stage.setTitle("GBD Dash");
-        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
         scene.getStylesheets().add("dashstyles.css");

@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -117,20 +119,27 @@ public class AuditController {
         if (event.getSource() == BtnAudit){
             System.out.println("Refreshed");
             reloadtable();
-            taNotes.setText("Audit Generated: 5 Officers have outdated documents - Names of Officers are displayed above");
+            //taNotes.setText("Audit Generated: 5 Officers have outdated documents - Names of Officers are displayed above");
         }
     }
 
     public void reloadtable(){
+        int count = 0;
         recordView.getItems().clear();
         Connection conn = getConnection();
         try {
             ResultSet result = conn.createStatement().executeQuery("select * from guardsdb");
             while(result.next()){
-                oblist.add(new Recordss(result.getInt("id"),result.getString("fname"),
-                        result.getString("lname"),result.getString("company"),
-                        result.getString("contact"),result.getDate("medical_exp"),
-                        result.getDate("psra_exp"),(result.getDate("police_rec_exp"))));
+                if (result.getDate("psra_exp").before(new Date()) || result.getDate("medical_exp").before(new Date()) || result.getDate("police_rec_exp").before(new Date())){
+                    count++;
+                    System.out.println(count);
+                    taNotes.setText("Audit Generated: " + count + " Officers that have outdated documents - Names of Officers are displayed above");
+                    System.out.println(result.getString("fname"));
+                    oblist.add(new Recordss(result.getInt("id"),result.getString("fname"),
+                            result.getString("lname"),result.getString("company"),
+                            result.getString("contact"),result.getDate("medical_exp"),
+                            result.getDate("psra_exp"),(result.getDate("police_rec_exp"))));
+             }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,8 +152,13 @@ public class AuditController {
         colMed.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         colPolice.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
         colPSRA.setCellValueFactory(new PropertyValueFactory<>("med_exp"));
+        //count lenght of oblist
+        //count = (oblist.size());
+        //int count2 = (oblist.size());
+        //System.out.println(count);
+
         recordView.setItems(oblist);
-        taNotes.setText("Audit Generated: 8 Officers have outdated documents - Names of Officers are displayed above");
+
     }
 
     @FXML
@@ -165,6 +179,21 @@ public class AuditController {
         stage.setScene(scene);
         stage.show();
         System.out.println("Test");
+    }
+    //show todays date
+    @FXML
+
+    //compare dates to see which is greater
+    public static boolean compareDates(Date date1, Date date2) {
+        if (date1.after(date2)) {
+            return true;
+        }
+        return false;
+    }
+    public String getDateTime(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
 

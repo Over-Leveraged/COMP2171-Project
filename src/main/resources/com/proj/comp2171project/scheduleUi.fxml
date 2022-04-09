@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -149,21 +150,21 @@
                 </Pane>
             </children>
         </HBox>
-      <TextField fx:id="tfBatchNumber" layoutX="217.0" layoutY="190.0" prefHeight="25.0" prefWidth="142.0" />
-      <Label layoutX="217.0" layoutY="167.0" text="Batch Number" />
-      <DatePicker fx:id="tfTrainingDate" layoutX="372.0" layoutY="189.0" prefHeight="25.0" prefWidth="153.0" />
-      <Label layoutX="372.0" layoutY="166.0" text="Date of Training" />
-      <TextField fx:id="tfTrainingName" layoutX="217.0" layoutY="254.0" prefHeight="25.0" prefWidth="142.0" />
-      <Label layoutX="217.0" layoutY="227.0" text="Training Name" />
-      <TextField fx:id="tfTrainingLocation" layoutX="372.0" layoutY="254.0" prefHeight="25.0" prefWidth="153.0" />
-      <Label layoutX="372.0" layoutY="227.0" text="Training Location" />
-      <Label layoutX="212.0" layoutY="110.0" text="Schedule Training" textFill="#0b1957">
+      <TextField fx:id="tfBatchNumber" layoutX="212.0" layoutY="171.0" prefHeight="25.0" prefWidth="142.0" />
+      <Label layoutX="212.0" layoutY="148.0" text="Batch Number" />
+      <DatePicker fx:id="tfTrainingDate" layoutX="367.0" layoutY="170.0" prefHeight="25.0" prefWidth="153.0" />
+      <Label layoutX="367.0" layoutY="147.0" text="Date of Training" />
+      <TextField fx:id="tfTrainingName" layoutX="213.0" layoutY="258.0" prefHeight="25.0" prefWidth="142.0" />
+      <Label layoutX="213.0" layoutY="231.0" text="Training Name" />
+      <TextField fx:id="tfTrainingLocation" layoutX="368.0" layoutY="258.0" prefHeight="25.0" prefWidth="153.0" />
+      <Label layoutX="368.0" layoutY="231.0" text="Training Location" />
+      <Label layoutX="212.0" layoutY="100.0" text="Schedule Training" textFill="#0b1957">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnSave" layoutX="217.0" layoutY="308.0" mnemonicParsing="false" onAction="#saveBtnClick" prefHeight="30.0" prefWidth="310.0" stylesheets="@../../../theme.css" text="Save" textFill="WHITE" />
-      <TableView fx:id="BatchViews" layoutX="566.0" layoutY="171.0" prefHeight="172.0" prefWidth="365.0" stylesheets="@../../../theme.css">
+      <Button fx:id="btnSave" layoutX="212.0" layoutY="322.0" mnemonicParsing="false" onAction="#saveBtnClick" prefHeight="30.0" prefWidth="310.0" text="Save" textFill="WHITE" />
+      <TableView fx:id="BatchViews" layoutX="585.0" layoutY="165.0" prefHeight="148.0" prefWidth="351.0" stylesheets="@../../../theme.css">
          <columns>
             <TableColumn fx:id="colBatch" prefWidth="62.0" text="Batch" />
             <TableColumn fx:id="colBatchDate" prefWidth="93.0" text="Date" />
@@ -171,5 +172,67 @@
             <TableColumn fx:id="colLocation" prefWidth="111.0" text="Location" />
          </columns>
       </TableView>
+      <ChoiceBox fx:id="cbUser" layoutX="753.0" layoutY="324.0" prefHeight="25.0" prefWidth="178.0" />
+      <Button fx:id="btnAssign" layoutX="585.0" layoutY="324.0" mnemonicParsing="false" onAction="#setBtnAssign" prefHeight="25.0" prefWidth="153.0" text="Assign Instructor" textFill="WHITE" />
+      <TableView fx:id="officerTv" layoutX="212.0" layoutY="375.0" prefHeight="199.0" prefWidth="375.0">
+        <columns>
+          <TableColumn fx:id="colBatchID" prefWidth="98.0" text="Assigned Batch" />
+          <TableColumn fx:id="colId" prefWidth="52.0" text="ID" />
+            <TableColumn fx:id="colfn" prefWidth="75.0" text="First Name" />
+            <TableColumn fx:id="colln" prefWidth="75.0" text="Last Name" />
+            <TableColumn fx:id="colCompany" prefWidth="75.0" text="Company" />
+        </columns>
+      </TableView>
+      <ChoiceBox fx:id="cbBatch" layoutX="315.0" layoutY="596.0" prefHeight="25.0" prefWidth="178.0" />
+      <Button fx:id="btnLoadBatch" layoutX="510.0" layoutY="596.0" mnemonicParsing="false" onAction="#setBtnLoadBatch" prefHeight="25.0" prefWidth="77.0" text="Load Batch" textFill="WHITE" />
+      <Label layoutX="212.0" layoutY="600.0" text="Officers in Batch:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="620.0" layoutY="375.0" prefHeight="199.0" prefWidth="319.0" style="-fx-background-color: white; -fx-border-color: #242C3C; -fx-border-width: 5;">
+         <children>
+            <Label fx:id="lbBatch" layoutX="160.0" layoutY="26.0" text="bc1000">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="26.0" text="Details for Batch:" textFill="#152132">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="25.0" layoutY="67.0" text="Assigned To:" textFill="#152132">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="106.0" text="Date of Training:" textFill="#152132">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="24.0" layoutY="149.0" text="Schedule On:" textFill="#152132">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbAssignedTo" layoutX="160.0" layoutY="67.0" text="bc1000">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbDate" layoutX="160.0" layoutY="106.0" text="bc1000">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbCreatedOn" layoutX="160.0" layoutY="149.0" text="bc1000">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
