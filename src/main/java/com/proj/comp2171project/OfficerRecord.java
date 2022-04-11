@@ -2,12 +2,12 @@ package com.proj.comp2171project;
 
 import java.sql.Date;
 
-public class Recordss {
+public class OfficerRecord {
     int id;
     String firstname,lastname,company,contact,batchid;
     Date med_exp,psra_exp,pol_exp;
 
-    public Recordss(int id, String firstname, String lastname, String company, String contact) {
+    public OfficerRecord(int id, String firstname, String lastname, String company, String contact) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -15,7 +15,7 @@ public class Recordss {
         this.contact = contact;
     }
 
-    public Recordss(int id, String firstname, String lastname, String company, String contact, Date med_exp,Date psra_exp,Date pol_exp) {
+    public OfficerRecord(int id, String firstname, String lastname, String company, String contact, Date med_exp, Date psra_exp, Date pol_exp) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -25,7 +25,7 @@ public class Recordss {
         this.psra_exp = psra_exp;
         this.pol_exp = pol_exp;
     }
-    public Recordss(int id, String firstname, String lastname, String company, String contact, Date med_exp,Date psra_exp,Date pol_exp,String batchid) {
+    public OfficerRecord(int id, String firstname, String lastname, String company, String contact, Date med_exp, Date psra_exp, Date pol_exp, String batchid) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

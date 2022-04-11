@@ -34,8 +34,9 @@ public class Email{
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(username));
         message.setRecipient(Message.RecipientType.TO,new InternetAddress(recipient));
+        message.setContent(msg,"text/html");
         message.setSubject(sub);
-        message.setText(msg);
+        //message.setText(msg);
         return message;
     }
 

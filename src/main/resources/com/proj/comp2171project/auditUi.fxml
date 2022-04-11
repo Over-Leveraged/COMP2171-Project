@@ -18,7 +18,7 @@
         <VBox layoutY="69.0" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #152132;" stylesheets="@../../../dashstyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="69.0">
             <children>
                 <Pane prefHeight="66.0" prefWidth="160.0" style="-fx-background-color: #242C3C;" />
-                <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="44.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">
+                <Button fx:id="btnHome" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#setBtnHomeOnclick" prefHeight="44.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Home" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -32,7 +32,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fas-home" iconSize="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnNew" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToNew" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="New Record" textFill="WHITE">
+                <Button fx:id="btnNew" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#setBtnNewOnclick" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="New Record" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -46,7 +46,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fltfal-add-square-24" iconSize="24" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#switchToEdit" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Edit Record" textFill="WHITE">
+                <Button fx:id="btnEdit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnEditOnclick" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Edit Record" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -60,7 +60,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fas-user-edit" iconSize="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">
+                <Button fx:id="btnSchedule" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#setBtnScheduleOnclick" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Schedule " textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -74,7 +74,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="far-calendar-alt" iconSize="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnNotify" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Send Email" textFill="WHITE">
+                <Button fx:id="btnNotify" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#setBtnNotifyOnclick" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Send Email" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -88,7 +88,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fas-mail-bulk" iconSize="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnAudit" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text=" Audit" textFill="WHITE">
+                <Button fx:id="btnAudit" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#setBtnAuditOnclick" prefHeight="56.0" prefWidth="160.0" style="-fx-background-color: green;" stylesheets="@../../../dashstyles.css" text=" Audit" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -102,7 +102,7 @@
                         <FontIcon iconColor="WHITE" iconLiteral="fas-network-wired" iconSize="20" />
                     </graphic>
                 </Button>
-                <Button fx:id="btnUsers" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Users" textFill="WHITE">
+                <Button fx:id="btnUsers" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#setBtnUsersOnclick" prefHeight="56.0" prefWidth="160.0" stylesheets="@../../../dashstyles.css" text="Users" textFill="WHITE">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>

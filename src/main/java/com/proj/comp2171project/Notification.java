@@ -12,10 +12,10 @@ public class Notification {
 
     public static String generateBatchNotification(String batchID,String fname,String lname){
 
-        notification = "Dear, Mr/Ms." + lname +
-                " You were assigned to training Batch " + batchID + " and will begin Training on May 22, 2022 in Kingston " +
-                " Regards," +
-                " A.Walsh";
+        notification = "<p>Dear, Mr/Ms." + lname + ","+"<br>" +
+                "<br> You were assigned to training Batch " + batchID + " and will begin Training on May 22, 2022 in Kingston. " +
+                " <br><br>Regards," +
+                " <br>A.User<p>";
         return (notification);
 
     }

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.text.DateFormat;
@@ -16,13 +17,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class ScheduleController implements Initializable {
-
     @FXML
     private DatePicker tfTrainingDate ;
     @FXML
@@ -49,17 +50,17 @@ public class ScheduleController implements Initializable {
 
     // TRAINING TABLE COLUMNS AND TABLE VIEW OPTIONS
     @FXML
-    private TableView<Recordss> officerTv;
+    private TableView<OfficerRecord> officerTv;
     @FXML
-    private TableColumn<Recordss, String> colBatchID;
+    private TableColumn<OfficerRecord, String> colBatchID;
     @FXML
-    private TableColumn<Recordss, Integer> colId; // ID
+    private TableColumn<OfficerRecord, Integer> colId; // ID
     @FXML
-    private TableColumn<Recordss, String> colfn;
+    private TableColumn<OfficerRecord, String> colfn;
     @FXML
-    private TableColumn<Recordss, String> colln;
+    private TableColumn<OfficerRecord, String> colln;
     @FXML
-    private TableColumn<Recordss, String> colCompany;
+    private TableColumn<OfficerRecord, String> colCompany;
     @FXML
     private Button btnLoadBatch;
     @FXML
@@ -74,13 +75,46 @@ public class ScheduleController implements Initializable {
     private Label lbCreatedOn;
     @FXML
     private Label lbDate;
-
     private String tfTName;
     private String tfTLocation;
     private String tfTBatch;
     private String tfTDate;
+    public static final Pattern VALID_ALPHA_NUMERIC_REGEX = Pattern.compile("[a-zA-Z0-9]*");
 
-
+    ////////////////////////////////////ACTIONS FOR SWITCHING SCREENS/////////////////////////////////////////////
+    @FXML
+    private void btnEditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEdit(event);
+    }
+    @FXML
+    private void setBtnLogoutOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToLogin(event);
+    }
+    @FXML
+    private void setBtnAuditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToAudit(event);
+    }
+    @FXML
+    private void setBtnHomeOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToDashboard(event);
+    }
+    @FXML
+    private void setBtnNewOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToNew(event);
+    }
+    @FXML
+    private void setBtnNotifyOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEmail(event);
+    }
+    @FXML
+    private void setBtnScheduleOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToSchedule(event);
+    }
+    @FXML
+    private void setBtnUsersOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToUsers(event);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @FXML
     void saveBtnClick(ActionEvent event){
@@ -92,6 +126,7 @@ public class ScheduleController implements Initializable {
             reloadTable();
         }
     }
+
     @FXML
     void setBtnAssign(ActionEvent event){
         if (event.getSource() == this.btnAssign) {
@@ -105,7 +140,6 @@ public class ScheduleController implements Initializable {
             alert.setTitle("Instructor Assigned");
             alert.setHeaderText(""+firstName+" "+lastName+" Was assigned to Batch: "+cbBatch.getValue());
             alert.showAndWait();
-
             //setCellValue();
         }
     }
@@ -134,18 +168,35 @@ public class ScheduleController implements Initializable {
             return null;
         }
     }
+
     private void insertRecord(){
         tfTBatch = tfBatchNumber.getText();
         tfTName=tfTrainingName.getText();
         tfTLocation=tfTrainingLocation.getText();
-        int userId = 1;
-        String createdDate = getDateTime();
-        String query = "INSERT INTO batch VALUES('" + tfTBatch + "','" + tfTName + "','" + tfTLocation +"','"+ tfTrainingDate.getValue()+"','"+userId+"','"+createdDate+"')";
-        reloadTable();
-        executeQuery(query);
-        clearCell();
-
-
+        //check if fields are empty
+        if(tfTBatch.isEmpty() || tfTName.isEmpty() || tfTLocation.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please fill in all fields");
+            alert.showAndWait();
+            //check if fields match the regex
+        }else if (!tfTBatch.matches(String.valueOf(VALID_ALPHA_NUMERIC_REGEX)) || !tfTName.matches("[a-zA-Z]+") || !tfTLocation.matches("[a-zA-Z]+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please enter valid data");
+            alert.showAndWait();
+        }else{
+            int userId = 1;
+            String createdDate = getDateTime();
+            String query = "INSERT INTO batch VALUES('" + tfTBatch + "','" + tfTName + "','" + tfTLocation + "','" + tfTrainingDate.getValue() + "','" + userId + "','" + createdDate + "')";
+            reloadTable();
+            executeQuery(query);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Batch Added");
+            alert.setHeaderText("Batch: " + tfTBatch + " was added");
+            alert.showAndWait();
+            clearCell();
+        }
     }
 
     private void executeQuery(String query) {
@@ -168,7 +219,7 @@ public class ScheduleController implements Initializable {
     ObservableList<Batch> oblist = FXCollections.observableArrayList();
     ArrayList<String> batchChoice = new ArrayList<String>();
     ArrayList<String> userChoice= new ArrayList<String>();
-    ObservableList<Recordss> reclist = FXCollections.observableArrayList();
+    ObservableList<OfficerRecord> reclist = FXCollections.observableArrayList();
     ObservableList<User> ulist = FXCollections.observableArrayList();
 
 
@@ -213,7 +264,7 @@ public class ScheduleController implements Initializable {
         try {
             ResultSet result = conn3.createStatement().executeQuery("select * from guardsdb where batch_id = '"+batch+"'");
             while(result.next()){
-                reclist.add(new Recordss(result.getInt("id"),result.getString("fname"),
+                reclist.add(new OfficerRecord(result.getInt("id"),result.getString("fname"),
                         result.getString("lname"),result.getString("company"),
                         result.getString("contact"),result.getDate("medical_exp"),
                         result.getDate("psra_exp"),result.getDate("police_rec_exp"),result.getString("batch_id")));
@@ -244,6 +295,8 @@ public class ScheduleController implements Initializable {
         cbBatch.setValue("bc1003");
         cbBatch.getItems().addAll(batchChoice);
     }
+    //alpha numeric regex
+
 
     public void setUserChoice(){
         userChoice.clear();
@@ -290,6 +343,7 @@ public class ScheduleController implements Initializable {
             public void handle(MouseEvent mouseEvent) {
                 Batch batchData = BatchViews.getItems().get(BatchViews.getSelectionModel().getSelectedIndex());
                 tfBatchNumber.setText(batchData.getBatchNumber());
+                cbBatch.setValue(batchData.getBatchName());
                 tfTrainingName.setText(batchData.getBatchName());
                 tfTrainingLocation.setText(batchData.getLocation());
                 lbBatch.setText(batchData.getBatchNumber());

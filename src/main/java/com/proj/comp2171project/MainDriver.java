@@ -13,6 +13,7 @@ public class MainDriver extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainDriver.class.getResource("auditUi.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 990, 710);
+        //Scene scene = new Scene(fxmlLoader.load(), 487, 418);
         stage.setTitle("GBD Dash");
         stage.setScene(scene);
         stage.show();

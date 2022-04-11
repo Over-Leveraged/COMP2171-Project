@@ -3,12 +3,10 @@ package com.proj.comp2171project;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -43,14 +41,42 @@ public class EmailController implements Initializable {
     private TextField tfReceipient;
     @FXML
     private TextField tfSubject;
-    @FXML
-    void switchToEdit(ActionEvent event) {
 
+    ////////////////////////////////////ACTIONS FOR SWITCHING SCREENS/////////////////////////////////////////////
+    @FXML
+    private void btnEditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEdit(event);
     }
     @FXML
-    void switchToNew(ActionEvent event) {
-
+    private void setBtnLogoutOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToLogin(event);
     }
+    @FXML
+    private void setBtnAuditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToAudit(event);
+    }
+    @FXML
+    private void setBtnHomeOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToDashboard(event);
+    }
+    @FXML
+    private void setBtnNewOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToNew(event);
+    }
+    @FXML
+    private void setBtnNotifyOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEmail(event);
+    }
+    @FXML
+    private void setBtnScheduleOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToSchedule(event);
+    }
+    @FXML
+    private void setBtnUsersOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToUsers(event);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private String [] reasons ={"Documents","Re-Training","Custom"};
 
 
@@ -64,12 +90,25 @@ public class EmailController implements Initializable {
     void onButtonClick(ActionEvent event) throws MessagingException {
         System.out.println("insert Clicked ME!!");
         if (event.getSource() == btnEmail) {
+
             String receipient = tfReceipient.getText();
             String subject = tfSubject.getText();
             String message = taMsg.getText();
+            if (receipient.equals("") || subject.equals("") || message.equals("")) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please enter all fields");
+                alert.showAndWait();
+            } else {
             Email.sendMail("swenProjectEmailer@gmail.com",subject,message);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Email Sent to " + receipient);
+            alert.showAndWait();
         }
     }
+    }
+
 
     @FXML
    void getChoice(ActionEvent event){
@@ -77,10 +116,10 @@ public class EmailController implements Initializable {
         System.out.println(choice);
         if (Objects.equals(choice, "Documents")){
             tfSubject.setText("Documents Outstanding");
-            taMsg.setText("Dear [Name Plate], /nYou have Documents Outstanding or Expired, please bring them to our location at [Address] as soon as possible /n/nRegards, /nAkiel Walsh");
+            taMsg.setText("<p>Dear [Name Plate],<br> You have Documents Outstanding or Expired, please bring them to our location at [Address] as soon as possible <br><br>Regards, <br>User User</p>");
         }else if (Objects.equals(choice, "Re-Training")){
             tfSubject.setText("Re-Training Scheduled");
-            taMsg.setText("Dear [Name Plate], /nYour retraining is being scheduled for [Date] /n/nRegards, /nAkiel Walsh");
+            taMsg.setText("<p>Dear [Name Plate], <br> Your retraining is being scheduled for [Date] <br><br>Regards, <br>User User<p>");
         }else if (Objects.equals(choice, "Custom")){
             tfSubject.setText("");
             taMsg.setText("");

@@ -1,15 +1,15 @@
 package com.proj.comp2171project;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,8 +20,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DashController implements Initializable {
@@ -34,24 +35,22 @@ public class DashController implements Initializable {
     // BUTTONS AND TEXT FIELD FUNCTIONALITIES
     @FXML
     private Button btnEdit;
-
+    @FXML
+    private Button btnLogout;
     @FXML
     private Button btnAudit;
-
     @FXML
     private Button btnHome;
-
     @FXML
     private Button btnNew;
-
     @FXML
     private Button btnNotify;
-
     @FXML
     private Button btnSchedule;
-
     @FXML
     private Button btnUsers;
+    @FXML
+    private Label labelTime;
 
     @FXML
     private Text lbLocation;
@@ -68,16 +67,16 @@ public class DashController implements Initializable {
     // MAIN TABLE COLUMNS AND TABLE VIEW OPTIONS
 
     @FXML
-    private TableView<Recordss> tbvOfficer;
+    private TableView<OfficerRecord> tbvOfficer;
 
     @FXML
-    private TableColumn<Recordss,String> tcFn;
+    private TableColumn<OfficerRecord,String> tcFn;
 
     @FXML
-    private TableColumn<Recordss,Integer> tcId;
+    private TableColumn<OfficerRecord,Integer> tcId;
 
     @FXML
-    private TableColumn<Recordss,String> tcLn;
+    private TableColumn<OfficerRecord,String> tcLn;
 
     @FXML
     private TableColumn<?, ?> tcNotify;
@@ -94,39 +93,46 @@ public class DashController implements Initializable {
 
     @FXML
     private TableColumn<Batch, String> colLocation;
+    private volatile boolean stop = false;
 
 
     //////////////////////ACTION EVENT BUTTONS FOR SWITCHING SCENES FROM THE DASHBOARD//////////////////////////////////
-   @FXML
-   public void switchToEdit(ActionEvent event) throws IOException {
-       Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RecordManagement.fxml")));
-       stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-       scene = new Scene(root, 990, 710);
-       stage.setScene(scene);
-       stage.show();
-       System.out.println("Test");
-   }
 
     @FXML
-    public void switchToNew(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("RecordUi.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 990, 710);
-        stage.setScene(scene);
-        stage.show();
-        System.out.println("Test");
+    private void btnEditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEdit(event);
     }
-
     @FXML
-    public void switchToSchedule(ActionEvent event) throws IOException {
-        System.out.println("Schedule Test");
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("scheduleUi.fxml")));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 990, 710);
-        stage.setScene(scene);
-        stage.show();
-
+    private void setBtnLogoutOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToLogin(event);
     }
+    @FXML
+    private void setBtnAuditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToAudit(event);
+    }
+    @FXML
+    private void setBtnHomeOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToDashboard(event);
+    }
+    @FXML
+    private void setBtnNewOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToNew(event);
+    }
+    @FXML
+    private void setBtnNotifyOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEmail(event);
+    }
+    @FXML
+    private void setBtnScheduleOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToSchedule(event);
+    }
+    @FXML
+    private void setBtnUsersOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToUsers(event);
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     @FXML
     public void loadTables(ActionEvent event){
         System.out.println("Load Table");
@@ -164,6 +170,7 @@ public class DashController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     //public void loadtable(){
+        Timenow();
         System.out.println("Initialized");
         Connection conn = getConnection();
         try {
@@ -205,5 +212,12 @@ public class DashController implements Initializable {
             BatchView.setItems(oblist);
 }
 
-
+private void Timenow(){
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy");
+    String formattedDate = dtf.format(now);
+    labelTime.setText(dtf.format(now));
+    }
 }
+
+

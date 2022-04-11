@@ -30,75 +30,51 @@ import javafx.stage.Stage;
 public class RecordController {
     @FXML
     ImageView imageView = new ImageView();
-
     List<String> lstFile;
-
     @FXML
     private Button btnCancel;
-
     @FXML
     private Button btnPolRec;
-
     @FXML
     private Button btnMed;
-
     @FXML
     private Button btnPSRA;
-
     @FXML
     private TextField labeltxt;
-
     @FXML
     private Button btnSave;
-
     @FXML
     private TableColumn<Records, String> colCompany;
-
     @FXML
     private TableColumn<Records, String> colFname;
-
     @FXML
     private TableColumn<Records, Integer> colID;
-
     @FXML
     private TableColumn<Records, String> colLname;
-
     @FXML
     private TableView<Records> tableRecords;
-
     @FXML
     private TextField tfCompany;
-
     @FXML
     private TextField tfFname;
-
     @FXML
     private TextField tfLname;
-
     @FXML
     private TextField tfid;
-
     @FXML
     private DatePicker medicalDate;
-
     @FXML
     private DatePicker polRecDate;
-
     @FXML
     private DatePicker psraDate;
-
     @FXML
     private TextField tfContact;
-
     @FXML
     private TextField tfMedical;
-
     @FXML
     private TextField tfPSRA;
-
     @FXML
     private TextField tfPolR;
-
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -111,13 +87,67 @@ public class RecordController {
     private String psraPath;
     private String policePath;
 
-   // private
-
+    ////////////////////////////////////ACTIONS FOR SWITCHING SCREENS/////////////////////////////////////////////
+    @FXML
+    private void btnEditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEdit(event);
+    }
+    @FXML
+    private void setBtnLogoutOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToLogin(event);
+    }
+    @FXML
+    private void setBtnAuditOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToAudit(event);
+    }
+    @FXML
+    private void setBtnHomeOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToDashboard(event);
+    }
+    @FXML
+    private void setBtnNewOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToNew(event);
+    }
+    @FXML
+    private void setBtnNotifyOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToEmail(event);
+    }
+    @FXML
+    private void setBtnScheduleOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToSchedule(event);
+    }
+    @FXML
+    private void setBtnUsersOnclick(ActionEvent event) throws IOException {
+        NavbarController.switchToUsers(event);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @FXML
     void onHelloButtonClick(ActionEvent event) {
         System.out.println("You Clicked ME!!");
         if (event.getSource() == btnSave) {
+            //check if all fields are filled
+            if (tfFname.getText().isEmpty() || tfLname.getText().isEmpty() || tfCompany.getText().isEmpty() || tfContact.getText().isEmpty() || tfid.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please fill all fields");
+                alert.showAndWait();
+            }else if (medicalDate.getValue() == null || polRecDate.getValue() == null || psraDate.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Please fill all fields");
+                alert.showAndWait();
+                //check if fields are filled correctly
+            } else  {
             insertRecord();
+            //confirm record is saved
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText("Information");
+            alert.setContentText("Record Saved");
+            alert.showAndWait();
+            }
         }
     }
 
@@ -135,7 +165,6 @@ public class RecordController {
         Image img = new Image(new FileInputStream(files.get(0)));
         imageView.setImage(img);
     }
-
     @FXML
     void saveFileBtnClick(ActionEvent event){
         if (event.getSource()== btnMed) {
@@ -191,9 +220,10 @@ public class RecordController {
         medicalPath = tfMedical.getText();
         policePath = tfPolR.getText();
         psraPath = tfPSRA.getText();
+        String batchId = "000000";
         String query = "INSERT INTO guardsdb VALUES (" + id + ",'" + fname + "','" + lname +"','"
-                        + company +"','" + contact +"','" + medicalDate.getValue()
-                        +"','" + medicalPath +"','" + psraDate.getValue() +"','" + polRecDate.getValue() +"')";
+                        + company +"','" + contact +"','" + medicalDate.getValue() +"','"
+                + psraDate.getValue() +"','" + polRecDate.getValue() +"','"+ batchId +"')";
         executeQuery(query);
         clearCell();
     }
@@ -208,33 +238,6 @@ public class RecordController {
             e.printStackTrace();
         }
     }
-
-    @FXML
-    public void switchToHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 990, 710);
-        scene.getStylesheets().add("theme.css");
-        stage.setScene(scene);
-        stage.show();
-    }
-    @FXML
-    public void switchToEdit(ActionEvent event) throws IOException {
-        Parent root2 = FXMLLoader.load(getClass().getResource("RecordManagement.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root2, 990, 710);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void switchToNew(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("RecordUi.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root, 990, 710);
-        stage.setScene(scene);
-        stage.show();
-    }
     private void clearCell(){
         tfid.clear();
         tfFname.clear();
@@ -245,4 +248,5 @@ public class RecordController {
         tfPSRA.clear();
         tfMedical.clear();
     }
+
 }

@@ -4,11 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-
 
 <AnchorPane prefHeight="487.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proj.comp2171project.LoginController">
    <children>
@@ -29,12 +29,18 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="tfUsername" layoutX="144.0" layoutY="206.0" prefHeight="25.0" prefWidth="195.0" style="-fx-border-color: white; -fx-background-color: none; -fx-border-radius: 10;" stylesheets="@../../../theme.css" />
+            <TextField fx:id="tfUsername" layoutX="144.0" layoutY="206.0" prefHeight="25.0" prefWidth="195.0" style="-fx-border-color: white; -fx-background-color: none; -fx-border-radius: 10;" stylesheets="@../../../theme.css">
+               <tooltip>
+                  <Tooltip text="Format: user@test.com" />
+               </tooltip></TextField>
             <Button id="sign" fx:id="btnSignin" layoutX="69.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSigninButtonClick" prefHeight="25.0" prefWidth="280.0" stylesheets="@../../../theme.css" text="Sign in" textFill="WHITE" />
             <FontIcon iconColor="#fcfcfc" iconLiteral="fas-user-lock" iconSize="40" layoutX="184.0" layoutY="116.0" />
             <FontIcon iconColor="WHITE" iconLiteral="fas-key" layoutX="54.0" layoutY="284.0" />
             <FontIcon iconColor="WHITE" iconLiteral="fas-user" layoutX="55.0" layoutY="225.0" text="" />
-            <PasswordField layoutX="145.0" layoutY="267.0" prefHeight="25.0" prefWidth="195.0" style="-fx-border-color: white; -fx-background-color: none; -fx-border-radius: 10;" />
+            <PasswordField fx:id="tfPassword" layoutX="145.0" layoutY="267.0" prefHeight="25.0" prefWidth="195.0" style="-fx-border-color: white; -fx-background-color: none; -fx-border-radius: 10;">
+               <tooltip>
+                  <Tooltip text="&gt; 8 Alpha Numeric Characters" />
+               </tooltip></PasswordField>
          </children>
       </Pane>
       <Pane prefHeight="487.0" prefWidth="402.0" style="-fx-background-color: #152132;">
